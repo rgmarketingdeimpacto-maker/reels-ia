@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<title>Reels IA — Producción audiovisual con inteligencia artificial</title>
-<meta name="description" content="Videos profesionales de 15–25 segundos con IA, locución y música. Listos para publicar en 48 horas hábiles. Desde $59.900/mes.">
+<title>Marketing de Impacto — Contenido audiovisual, web y automatización</title>
+<meta name="description" content="Ayudamos a empresas a comunicar mejor sus servicios. Contenido audiovisual, desarrollo web, automatización e inteligencia artificial para pequeñas y medianas empresas.">
 <!-- Open Graph / WhatsApp preview -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://rgmarketingdeimpacto-maker.github.io/reels-ia/">
-<meta property="og:title" content="Reels IA — Videos profesionales con IA">
-<meta property="og:description" content="Reels profesionales con IA desde $59.900/mes. Listo para publicar en 48 horas hábiles. Pide tu muestra gratis!!">
+<meta property="og:title" content="Marketing de Impacto — Comunicación digital para empresas">
+<meta property="og:description" content="Contenido audiovisual, desarrollo web, automatización e IA para pequeñas y medianas empresas.">
 <meta property="og:image" content="https://rgmarketingdeimpacto-maker.github.io/reels-ia/preview2.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -233,6 +233,93 @@ section.compare .section-body { color: #666; }
   margin-top: 1.25rem;
 }
 
+/* ── SERVICES ── */
+.services-grid {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--gray-200); border: 1px solid var(--gray-200);
+  border-radius: var(--radius); overflow: hidden; margin-top: 2rem;
+}
+.service-item {
+  background: var(--white); padding: 1.5rem 1.25rem;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.service-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: var(--black); border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+}
+.service-icon svg { width: 20px; height: 20px; stroke: var(--white); fill: none; stroke-width: 1.75; }
+.service-item h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.service-item p { font-size: 13px; color: var(--gray-500); line-height: 1.55; }
+
+/* ── PORTFOLIO ── */
+section.portfolio-section { background: var(--black); }
+section.portfolio-section .section-title { color: var(--white); }
+section.portfolio-section .section-body { color: #666; }
+
+.portfolio-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.75rem;
+}
+.ptab {
+  font-size: 12px; font-weight: 600; color: #666;
+  background: transparent; border: 1px solid #222;
+  border-radius: 99px; padding: 7px 16px; cursor: pointer;
+  transition: all .2s; -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.04em;
+}
+.ptab.active { color: var(--white); border-color: var(--red); background: #1a0008; }
+
+.portfolio-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.pcard {
+  display: none;
+  background: #111; border: 1px solid #1f1f1f;
+  border-radius: var(--radius); overflow: hidden;
+  text-decoration: none; color: inherit;
+  transition: border-color .2s;
+  -webkit-tap-highlight-color: transparent;
+  flex-direction: column;
+}
+.pcard.visible { display: flex; }
+.pcard:hover { border-color: #333; }
+.pcard-thumb {
+  width: 100%; aspect-ratio: 9/16;
+  background: #1a1a1a;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.pcard-thumb.web { aspect-ratio: 16/9; }
+.pcard-thumb svg { opacity: 0.25; }
+.pcard-play {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.pcard-play-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,45,85,0.85);
+  display: flex; align-items: center; justify-content: center;
+}
+.pcard-play-btn svg { width: 16px; height: 16px; fill: white; margin-left: 3px; }
+.pcard-web-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+}
+.pcard-web-icon svg { width: 18px; height: 18px; stroke: #aaa; fill: none; stroke-width: 1.75; }
+.pcard-body { padding: 0.9rem 1rem; flex: 1; }
+.pcard-client {
+  font-size: 10px; font-weight: 700; color: var(--red);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px;
+}
+.pcard-title { font-size: 13px; font-weight: 600; color: var(--white); line-height: 1.35; margin-bottom: 4px; }
+.pcard-desc { font-size: 11px; color: #555; line-height: 1.5; }
+.pcard-type {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  color: #444; border: 1px solid #222; border-radius: 99px;
+  padding: 3px 9px; margin-top: 8px; letter-spacing: 0.04em;
+}
+
 /* ── STEPS ── */
 section.steps-section { background: var(--gray-100); }
 .steps-grid { display: flex; flex-direction: column; gap: 1.75rem; margin-top: 2rem; }
@@ -276,170 +363,369 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo">Reels<span> IA</span></span>
-  <a href="#cta" class="nav-cta">Muestra gratis</a>
+  <a href="#" style="display:flex;align-items:center;text-decoration:none;">
+    <img src="LogoWeb.png" alt="Marketing de Impacto" style="height:36px;width:auto;display:block;">
+  </a>
+  <a href="https://wa.me/56967792837?text=Hola%2C%20quiero%20hablar%20de%20mi%20proyecto" class="nav-cta" target="_blank" rel="noopener">Hablemos</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <span class="hero-eyebrow">Producción audiovisual con IA</span>
-  <h1>Tu marca en <em>reel</em>,<br>sin productora</h1>
-  <p class="hero-sub">Videos de 15–25 seg con locución, imágenes IA y música. Listos para publicar en 48 horas hábiles.</p>
+  <span class="hero-eyebrow">Comunicación digital para empresas</span>
+  <h1>Ayudamos a empresas a<br><em>comunicar mejor</em><br>sus servicios.</h1>
+  <p class="hero-sub">Contenido audiovisual, desarrollo web, automatización e inteligencia artificial para pequeñas y medianas empresas.</p>
   <div class="hero-actions">
-    <a href="#cta" class="btn-primary">Pedir muestra gratis</a>
-    <a href="#planes" class="btn-ghost">Ver planes</a>
-  </div>
-  <div class="savings-bar fade-in">
-    <span class="label">Productora tradicional vs Reels IA</span>
-    <span class="amount" id="savings-counter">$0</span>
-    <span class="desc">más caro por video</span>
+    <a href="#portafolio" class="btn-primary">Ver trabajos</a>
+    <a href="https://wa.me/56967792837?text=Hola%2C%20quiero%20hablar%20de%20mi%20proyecto" class="btn-ghost" target="_blank" rel="noopener">Hablemos de tu proyecto</a>
   </div>
 </section>
 
-<!-- INCLUYE -->
+<!-- QUÉ HACEMOS -->
 <section>
   <div class="section-inner">
-    <span class="section-tag fade-in">Qué incluye</span>
-    <h2 class="section-title fade-in">Todo en un solo video</h2>
-    <p class="section-body fade-in">Sin coordinar equipo técnico, locutores ni editores por separado. Un precio, entrega completa.</p>
-    <div class="includes-grid fade-in">
-      <div class="include-item">
-        <div class="include-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    <span class="section-tag fade-in">Servicios</span>
+    <h2 class="section-title fade-in">Qué hacemos</h2>
+    <div class="services-grid fade-in">
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
         </div>
         <div>
-          <h3>Imágenes generadas con IA</h3>
-          <p>Adaptadas al rubro e identidad visual de tu empresa.</p>
+          <h3>Contenido audiovisual</h3>
+          <p>Creamos piezas diseñadas para explicar, emocionar y vender.</p>
         </div>
       </div>
-      <div class="include-item">
-        <div class="include-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
         </div>
         <div>
-          <h3>Locución profesional</h3>
-          <p>Guión redactado a medida de tu marca y audiencia.</p>
+          <h3>Desarrollo web</h3>
+          <p>Sitios corporativos y landing pages orientadas a resultados.</p>
         </div>
       </div>
-      <div class="include-item">
-        <div class="include-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
         </div>
         <div>
-          <h3>Música sin copyright</h3>
-          <p>Apta para cualquier plataforma sin restricciones.</p>
-        </div>
-      </div>
-      <div class="include-item">
-        <div class="include-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <div>
-          <h3>Formato a elección</h3>
-          <p>Vertical para Reels y TikTok, o 16:9 para YouTube.</p>
+          <h3>Automatización e IA</h3>
+          <p>Herramientas digitales que ahorran tiempo y mejoran procesos.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMPARE -->
-<section class="compare">
+<!-- PORTAFOLIO -->
+<section class="portfolio-section" id="portafolio">
   <div class="section-inner">
-    <span class="section-tag fade-in">Por qué Reels IA</span>
-    <h2 class="section-title fade-in">Producción completa,<br>fracción del costo</h2>
-    <p class="section-body fade-in">El mismo resultado de una agencia, sin el precio de una agencia.</p>
-    <div class="compare-cards fade-in">
-      <div class="compare-card">
-        <span class="c-name">Productora audiovisual</span>
-        <span class="c-price">$300.000+ / video</span>
-        <span class="c-pill">Solo grabación</span>
-      </div>
-      <div class="compare-card">
-        <span class="c-name">Agencia de redes sociales</span>
-        <span class="c-price">$350.000+ / mes</span>
-        <span class="c-pill">4 reels + gestión</span>
-      </div>
-      <div class="compare-card">
-        <span class="c-name">Editor freelance</span>
-        <span class="c-price">$20.000–$60.000</span>
-        <span class="c-pill">Solo edición</span>
-      </div>
-      <div class="compare-card highlight">
-        <span class="c-name">✓ Reels IA</span>
-        <span class="c-price">desde $59.900 / mes</span>
-        <span class="c-pill">IA + locución + música</span>
-      </div>
+    <span class="section-tag fade-in">Trabajos</span>
+    <h2 class="section-title fade-in">Portafolio</h2>
+    <p class="section-body fade-in">Proyectos reales para clientes reales.</p>
+
+    <div class="portfolio-tabs fade-in">
+      <button class="ptab active" onclick="filterPortfolio('todos', this)">Todos</button>
+      <button class="ptab" onclick="filterPortfolio('redfox', this)">RedFox</button>
+      <button class="ptab" onclick="filterPortfolio('hedonico', this)">Hedónico</button>
+      <button class="ptab" onclick="filterPortfolio('origen', this)">Origen</button>
+      <button class="ptab" onclick="filterPortfolio('web', this)">Web</button>
+    </div>
+
+    <div class="portfolio-grid fade-in">
+
+      <!-- REDFOX -->
+      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZbOCu_AvDZ/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">RedFox</p>
+          <p class="pcard-title">Buen tiempo = posible recompensa</p>
+          <p class="pcard-desc">Cuando el rendimiento tiene premio, cada kilómetro se corre distinto.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZcwbvkg_Km/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">RedFox</p>
+          <p class="pcard-title">Transferencia RedFox</p>
+          <p class="pcard-desc">Hacer tangible el beneficio económico de correr.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZcxvvfgEld/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">RedFox</p>
+          <p class="pcard-title">Zapatillas</p>
+          <p class="pcard-desc">Mostrar qué cosas se vuelven posibles gracias a una recompensa.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLaEBghu5/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">RedFox</p>
+          <p class="pcard-title">El Cuñado</p>
+          <p class="pcard-desc">Cambiar la percepción del running cuando existe una recompensa.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLi4zARc_/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">RedFox</p>
+          <p class="pcard-title">El que canta en la ducha</p>
+          <p class="pcard-desc">El impacto positivo del beneficio mostrado sin decirlo.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLtLbgumR/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">RedFox</p>
+          <p class="pcard-title">La caída</p>
+          <p class="pcard-desc">Los tropiezos también valen cuando hay motivación extra.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMgurg53h/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">RedFox</p>
+          <p class="pcard-title">Llegan lucas (mujer)</p>
+          <p class="pcard-desc">Conectar desempeño deportivo con expectativa de ganancia.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMvr_AtDX/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">RedFox</p>
+          <p class="pcard-title">Llegan lucas (hombre)</p>
+          <p class="pcard-desc">El mismo mensaje, otro perfil de corredor.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <!-- HEDÓNICO -->
+      <a class="pcard visible" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLAfcgCSF/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Hedónico</p>
+          <p class="pcard-title">Cocina</p>
+          <p class="pcard-desc">La transformación de un sueño en un espacio real, desde cero.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLL-rgQ2j/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Hedónico</p>
+          <p class="pcard-title">Clóset</p>
+          <p class="pcard-desc">Módulos y terminaciones que convierten una idea en espacio propio.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfL4QBgzrj/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Hedónico</p>
+          <p class="pcard-title">Vanitorio</p>
+          <p class="pcard-desc">Exactamente como lo imaginaste, pero mejor.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMCIHA6Qj/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Hedónico</p>
+          <p class="pcard-title">Quincho</p>
+          <p class="pcard-desc">Estructura y mobiliario exterior que superan la expectativa.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <!-- ORIGEN -->
+      <a class="pcard visible" data-cat="origen" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZi73r3gZBz/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Origen Psicología</p>
+          <p class="pcard-title">Universitaria</p>
+          <p class="pcard-desc">No tenía que entenderlo sola. Buscar ayuda permite recuperar herramientas.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="origen" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZi8HfmAEC6/" target="_blank" rel="noopener">
+        <div class="pcard-thumb">
+          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Origen Psicología</p>
+          <p class="pcard-title">Pareja</p>
+          <p class="pcard-desc">Estaban juntos pero ya no se encontraban. Aprendieron a encontrarse.</p>
+          <span class="pcard-type">Reel · IG</span>
+        </div>
+      </a>
+
+      <!-- WEB -->
+      <a class="pcard visible" data-cat="web" href="https://rgarrido2020.github.io/lapaltaperfecta/" target="_blank" rel="noopener">
+        <div class="pcard-thumb web">
+          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Landing</p>
+          <p class="pcard-title">La Palta Perfecta</p>
+          <p class="pcard-desc">Landing page orientada a conversión.</p>
+          <span class="pcard-type">Web</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="web" href="https://rgarrido2020.github.io/Weekend-Piano/" target="_blank" rel="noopener">
+        <div class="pcard-thumb web">
+          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Landing</p>
+          <p class="pcard-title">Weekend Piano</p>
+          <p class="pcard-desc">Landing page para evento musical.</p>
+          <span class="pcard-type">Web</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="web" href="https://concertoprivato.github.io/concerto/" target="_blank" rel="noopener">
+        <div class="pcard-thumb web">
+          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Sitio web</p>
+          <p class="pcard-title">Concerto Privato</p>
+          <p class="pcard-desc">Sitio corporativo para servicio de música en vivo.</p>
+          <span class="pcard-type">Web</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="web" href="https://estudiomurale.com/" target="_blank" rel="noopener">
+        <div class="pcard-thumb web">
+          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Sitio web</p>
+          <p class="pcard-title">Estudio Murale</p>
+          <p class="pcard-desc">Sitio corporativo para estudio de diseño.</p>
+          <span class="pcard-type">Web</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="web" href="https://lukasgarrich.github.io/lukasgarrich/" target="_blank" rel="noopener">
+        <div class="pcard-thumb web">
+          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Sitio personal</p>
+          <p class="pcard-title">Lukas Garrido</p>
+          <p class="pcard-desc">Portafolio personal.</p>
+          <span class="pcard-type">Web</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="web" href="https://fotosvideos.github.io/musa/" target="_blank" rel="noopener">
+        <div class="pcard-thumb web">
+          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Bárbara Fuentes</p>
+          <p class="pcard-title">Musa Pole Championship</p>
+          <p class="pcard-desc">Landing para campeonato de pole.</p>
+          <span class="pcard-type">Web</span>
+        </div>
+      </a>
+
+      <a class="pcard visible" data-cat="web" href="https://sage-lolly-46c025.netlify.app/" target="_blank" rel="noopener">
+        <div class="pcard-thumb web">
+          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-client">Bárbara Fuentes</p>
+          <p class="pcard-title">Elevate Aerial</p>
+          <p class="pcard-desc">Sitio para academia de aerial arts.</p>
+          <span class="pcard-type">Web</span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
 
-<!-- PLANES -->
-<section id="planes">
-  <div class="section-inner">
-    <span class="section-tag fade-in">Planes</span>
-    <h2 class="section-title fade-in">Elige tu frecuencia</h2>
-    <p class="section-body fade-in">Sin permanencia mínima. Más volumen, menor precio por video.</p>
-    <div class="plans-grid fade-in">
-      <div class="plan-card">
-        <p class="plan-name">Básico</p>
-        <p class="plan-videos">2</p>
-        <p class="plan-unit">reels / mes</p>
-        <p class="plan-price">$59.900</p>
-        <p class="plan-ppv">$29.950 c/u</p>
-      </div>
-      <div class="plan-card featured">
-        <span class="popular-badge">Más popular</span>
-        <p class="plan-name">Estándar</p>
-        <p class="plan-videos">4</p>
-        <p class="plan-unit">reels / mes</p>
-        <p class="plan-price">$89.000</p>
-        <p class="plan-ppv">$22.250 c/u</p>
-      </div>
-      <div class="plan-card">
-        <p class="plan-name">Avanzado</p>
-        <p class="plan-videos">6</p>
-        <p class="plan-unit">reels / mes</p>
-        <p class="plan-price">$126.000</p>
-        <p class="plan-ppv">$21.000 c/u</p>
-      </div>
-      <div class="plan-card">
-        <p class="plan-name">Premium</p>
-        <p class="plan-videos">8</p>
-        <p class="plan-unit">reels / mes</p>
-        <p class="plan-price">$160.000</p>
-        <p class="plan-ppv">$20.000 c/u</p>
-      </div>
-    </div>
-    <p class="plans-note fade-in">Sin permanencia · Mensual · Cancela cuando quieras</p>
-  </div>
-</section>
-
-<!-- STEPS -->
+<!-- CÓMO TRABAJAMOS -->
 <section class="steps-section">
   <div class="section-inner">
-    <span class="section-tag fade-in">Cómo funciona</span>
-    <h2 class="section-title fade-in">Tres pasos,<br>un video listo</h2>
+    <span class="section-tag fade-in">Proceso</span>
+    <h2 class="section-title fade-in">Cómo trabajamos</h2>
     <div class="steps-grid fade-in">
       <div class="step">
         <span class="step-num">01</span>
         <div>
-          <h3>Nos envías tu info</h3>
-          <p>Nombre, rubro, productos o servicios y el tono de comunicación que quieres.</p>
+          <h3>Entendemos tu negocio.</h3>
+          <p>Conversamos sobre tus objetivos, tu audiencia y lo que quieres comunicar.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">02</span>
         <div>
-          <h3>Producimos el reel</h3>
-          <p>Redactamos el guión, generamos imágenes con IA y añadimos locución y música.</p>
+          <h3>Diseñamos la idea.</h3>
+          <p>Desarrollamos la propuesta creativa y técnica alineada con tu marca.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">03</span>
         <div>
-          <h3>Lo recibes listo</h3>
-          <p>En 48 horas hábiles. Archivo terminado, listo para subir.</p>
+          <h3>Creamos la solución.</h3>
+          <p>Producimos el contenido, el sitio o la herramienta con foco en resultados.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <div>
+          <h3>Implementamos.</h3>
+          <p>Entregamos listo para usar y acompañamos el proceso hasta que funcione.</p>
         </div>
       </div>
     </div>
@@ -449,51 +735,44 @@ footer {
 <!-- CTA -->
 <section class="cta-section" id="cta">
   <div class="section-inner">
-    <span class="section-tag fade-in">Sin compromiso</span>
-    <h2 class="section-title fade-in">Pruébalo antes<br>de contratar</h2>
-    <p class="section-body fade-in">Te hacemos un reel de muestra con el logo de tu empresa, sin costo, para que evalúes la calidad antes de comprometerte.</p>
-    <a href="https://wa.me/56967792837?text=Hola%2C%20quiero%20pedir%20mi%20reel%20de%20muestra%20gratis" class="btn-red fade-in" target="_blank" rel="noopener">
+    <span class="section-tag fade-in">Trabajemos juntos</span>
+    <h2 class="section-title fade-in">¿Tienes un proyecto<br>en mente?</h2>
+    <p class="section-body fade-in">Cuéntanos en qué estás trabajando. Nos tomamos el tiempo para entender tu negocio antes de proponer cualquier cosa.</p>
+    <a href="https://wa.me/56967792837?text=Hola%2C%20quiero%20hablar%20de%20mi%20proyecto" class="btn-red fade-in" target="_blank" rel="noopener">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.374 0 0 5.373 0 12c0 2.128.555 4.126 1.524 5.859L.057 23.985l6.305-1.654A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.017-1.376l-.36-.214-3.733.979 1.001-3.643-.234-.374A9.817 9.817 0 0 1 2.182 12C2.182 6.57 6.569 2.182 12 2.182S21.818 6.57 21.818 12 17.431 21.818 12 21.818z"/></svg>
-      Pedir muestra gratis por WhatsApp
+      Hablemos de tu proyecto
     </a>
-    <p class="cta-note fade-in">Respondemos en menos de 24 horas · Sin costo · Sin compromiso</p>
+    <p class="cta-note fade-in">También puedes escribirnos para agendar una conversación · Sin costo · Sin compromiso</p>
   </div>
 </section>
 
 <footer>
-  <p>Reels IA · Un producto de Marketing de Impacto · 2026</p>
+  <p>Marketing de Impacto · Contenido audiovisual · Desarrollo web · Automatización e IA · 2026</p>
 </footer>
 
 <script>
-function animateCounter(el, target, duration) {
-  var start = performance.now();
-  var formatter = new Intl.NumberFormat('es-CL');
-  function tick(now) {
-    var elapsed = Math.min((now - start) / duration, 1);
-    var eased = 1 - Math.pow(1 - elapsed, 3);
-    el.textContent = '$' + formatter.format(Math.round(eased * target));
-    if (elapsed < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
+function filterPortfolio(cat, btn) {
+  document.querySelectorAll('.ptab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.pcard').forEach(function(c) {
+    if (cat === 'todos' || c.dataset.cat === cat) {
+      c.classList.add('visible');
+    } else {
+      c.classList.remove('visible');
+    }
+  });
 }
 
-var counterDone = false;
 var io = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      if (entry.target.id === 'savings-counter' && !counterDone) {
-        counterDone = true;
-        animateCounter(entry.target, 240100, 1600);
-      }
       io.unobserve(entry.target);
     }
   });
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-in').forEach(function(el) { io.observe(el); });
-var counter = document.getElementById('savings-counter');
-if (counter) io.observe(counter);
 </script>
 </body>
 </html>
