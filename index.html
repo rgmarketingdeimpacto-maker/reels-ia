@@ -269,56 +269,26 @@ section.portfolio-section .section-body { color: #666; }
 }
 .ptab.active { color: var(--white); border-color: var(--red); background: #1a0008; }
 
-.portfolio-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-}
-.pcard {
-  display: none;
-  background: #111; border: 1px solid #1f1f1f;
-  border-radius: var(--radius); overflow: hidden;
+.plist { display: flex; flex-direction: column; gap: 1px; background: #1a1a1a; border-radius: var(--radius); overflow: hidden; }
+.pitem {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #111; padding: 0.9rem 1rem;
   text-decoration: none; color: inherit;
-  transition: border-color .2s;
+  transition: background .15s;
   -webkit-tap-highlight-color: transparent;
-  flex-direction: column;
+  gap: 12px;
 }
-.pcard.visible { display: flex; }
-.pcard:hover { border-color: #333; }
-.pcard-thumb {
-  width: 100%; aspect-ratio: 9/16;
-  background: #1a1a1a;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
+.pitem.hidden { display: none; }
+.pitem:hover { background: #161616; }
+.pitem-left { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.pitem-client { font-size: 10px; font-weight: 700; color: var(--red); letter-spacing: 0.1em; text-transform: uppercase; }
+.pitem-title { font-size: 14px; font-weight: 600; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pitem-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.pitem-badge {
+  font-size: 10px; font-weight: 600; color: #555;
+  border: 1px solid #2a2a2a; border-radius: 99px; padding: 3px 9px;
 }
-.pcard-thumb.web { aspect-ratio: 16/9; }
-.pcard-thumb svg { opacity: 0.25; }
-.pcard-play {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-}
-.pcard-play-btn {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,45,85,0.85);
-  display: flex; align-items: center; justify-content: center;
-}
-.pcard-play-btn svg { width: 16px; height: 16px; fill: white; margin-left: 3px; }
-.pcard-web-icon {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  display: flex; align-items: center; justify-content: center;
-}
-.pcard-web-icon svg { width: 18px; height: 18px; stroke: #aaa; fill: none; stroke-width: 1.75; }
-.pcard-body { padding: 0.9rem 1rem; flex: 1; }
-.pcard-client {
-  font-size: 10px; font-weight: 700; color: var(--red);
-  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px;
-}
-.pcard-title { font-size: 13px; font-weight: 600; color: var(--white); line-height: 1.35; margin-bottom: 4px; }
-.pcard-desc { font-size: 11px; color: #555; line-height: 1.5; }
-.pcard-type {
-  display: inline-block; font-size: 10px; font-weight: 600;
-  color: #444; border: 1px solid #222; border-radius: 99px;
-  padding: 3px 9px; margin-top: 8px; letter-spacing: 0.04em;
-}
+.pitem-arrow { color: #333; font-size: 16px; line-height: 1; }
 
 /* ── STEPS ── */
 section.steps-section { background: var(--gray-100); }
@@ -432,6 +402,107 @@ footer {
       <button class="ptab" onclick="filterPortfolio('web', this)">Web</button>
     </div>
 
+    <div class="plist fade-in">
+      <a class="pitem" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZbOCu_AvDZ/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">RedFox</span><span class="pitem-title">Buen tiempo = posible recompensa</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZcwbvkg_Km/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">RedFox</span><span class="pitem-title">Transferencia RedFox</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZcxvvfgEld/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">RedFox</span><span class="pitem-title">Zapatillas</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLaEBghu5/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">RedFox</span><span class="pitem-title">El Cuñado</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLi4zARc_/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">RedFox</span><span class="pitem-title">El que canta en la ducha</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLtLbgumR/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">RedFox</span><span class="pitem-title">La caída</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMgurg53h/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">RedFox</span><span class="pitem-title">Llegan lucas (mujer)</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMvr_AtDX/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">RedFox</span><span class="pitem-title">Llegan lucas (hombre)</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLAfcgCSF/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Hedónico</span><span class="pitem-title">Cocina</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLL-rgQ2j/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Hedónico</span><span class="pitem-title">Clóset</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfL4QBgzrj/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Hedónico</span><span class="pitem-title">Vanitorio</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMCIHA6Qj/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Hedónico</span><span class="pitem-title">Quincho</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="origen" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZi73r3gZBz/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Origen Psicología</span><span class="pitem-title">Universitaria</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="origen" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZi8HfmAEC6/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Origen Psicología</span><span class="pitem-title">Pareja</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Reel</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="web" href="https://rgarrido2020.github.io/lapaltaperfecta/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Landing</span><span class="pitem-title">La Palta Perfecta</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Web</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="web" href="https://rgarrido2020.github.io/Weekend-Piano/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Landing</span><span class="pitem-title">Weekend Piano</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Web</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="web" href="https://concertoprivato.github.io/concerto/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Sitio web</span><span class="pitem-title">Concerto Privato</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Web</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="web" href="https://estudiomurale.com/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Sitio web</span><span class="pitem-title">Estudio Murale</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Web</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="web" href="https://lukasgarrich.github.io/lukasgarrich/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Portafolio</span><span class="pitem-title">Lukas Garrido</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Web</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="web" href="https://fotosvideos.github.io/musa/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Bárbara Fuentes</span><span class="pitem-title">Musa Pole Championship</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Web</span><span class="pitem-arrow">↗</span></div>
+      </a>
+      <a class="pitem" data-cat="web" href="https://tatos.cl/" target="_blank" rel="noopener">
+        <div class="pitem-left"><span class="pitem-client">Sitio web</span><span class="pitem-title">Tatos</span></div>
+        <div class="pitem-right"><span class="pitem-badge">Web</span><span class="pitem-arrow">↗</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+  <div class="section-inner">
+    <span class="section-tag fade-in">Trabajos</span>
+    <h2 class="section-title fade-in">Portafolio</h2>
+    <p class="section-body fade-in">Proyectos reales para clientes reales.</p>
+
+    <div class="portfolio-tabs fade-in">
+      <button class="ptab active" onclick="filterPortfolio('todos', this)">Todos</button>
+      <button class="ptab" onclick="filterPortfolio('redfox', this)">RedFox</button>
+      <button class="ptab" onclick="filterPortfolio('hedonico', this)">Hedónico</button>
+      <button class="ptab" onclick="filterPortfolio('origen', this)">Origen</button>
+      <button class="ptab" onclick="filterPortfolio('web', this)">Web</button>
+    </div>
+
     <div class="portfolio-grid fade-in">
 
       <!-- REDFOX -->
@@ -442,7 +513,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">RedFox</p>
           <p class="pcard-title">Buen tiempo = posible recompensa</p>
-          <p class="pcard-desc">Cuando el rendimiento tiene premio, cada kilómetro se corre distinto.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -454,7 +525,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">RedFox</p>
           <p class="pcard-title">Transferencia RedFox</p>
-          <p class="pcard-desc">Hacer tangible el beneficio económico de correr.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -466,7 +537,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">RedFox</p>
           <p class="pcard-title">Zapatillas</p>
-          <p class="pcard-desc">Mostrar qué cosas se vuelven posibles gracias a una recompensa.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -478,7 +549,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">RedFox</p>
           <p class="pcard-title">El Cuñado</p>
-          <p class="pcard-desc">Cambiar la percepción del running cuando existe una recompensa.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -490,7 +561,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">RedFox</p>
           <p class="pcard-title">El que canta en la ducha</p>
-          <p class="pcard-desc">El impacto positivo del beneficio mostrado sin decirlo.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -502,7 +573,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">RedFox</p>
           <p class="pcard-title">La caída</p>
-          <p class="pcard-desc">Los tropiezos también valen cuando hay motivación extra.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -514,7 +585,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">RedFox</p>
           <p class="pcard-title">Llegan lucas (mujer)</p>
-          <p class="pcard-desc">Conectar desempeño deportivo con expectativa de ganancia.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -526,7 +597,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">RedFox</p>
           <p class="pcard-title">Llegan lucas (hombre)</p>
-          <p class="pcard-desc">El mismo mensaje, otro perfil de corredor.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -539,7 +610,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Hedónico</p>
           <p class="pcard-title">Cocina</p>
-          <p class="pcard-desc">La transformación de un sueño en un espacio real, desde cero.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -551,7 +622,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Hedónico</p>
           <p class="pcard-title">Clóset</p>
-          <p class="pcard-desc">Módulos y terminaciones que convierten una idea en espacio propio.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -563,7 +634,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Hedónico</p>
           <p class="pcard-title">Vanitorio</p>
-          <p class="pcard-desc">Exactamente como lo imaginaste, pero mejor.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -575,7 +646,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Hedónico</p>
           <p class="pcard-title">Quincho</p>
-          <p class="pcard-desc">Estructura y mobiliario exterior que superan la expectativa.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -588,7 +659,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Origen Psicología</p>
           <p class="pcard-title">Universitaria</p>
-          <p class="pcard-desc">No tenía que entenderlo sola. Buscar ayuda permite recuperar herramientas.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -600,7 +671,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Origen Psicología</p>
           <p class="pcard-title">Pareja</p>
-          <p class="pcard-desc">Estaban juntos pero ya no se encontraban. Aprendieron a encontrarse.</p>
+          
           <span class="pcard-type">Reel · IG</span>
         </div>
       </a>
@@ -613,7 +684,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Landing</p>
           <p class="pcard-title">La Palta Perfecta</p>
-          <p class="pcard-desc">Landing page orientada a conversión.</p>
+          
           <span class="pcard-type">Web</span>
         </div>
       </a>
@@ -625,7 +696,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Landing</p>
           <p class="pcard-title">Weekend Piano</p>
-          <p class="pcard-desc">Landing page para evento musical.</p>
+          
           <span class="pcard-type">Web</span>
         </div>
       </a>
@@ -637,7 +708,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Sitio web</p>
           <p class="pcard-title">Concerto Privato</p>
-          <p class="pcard-desc">Sitio corporativo para servicio de música en vivo.</p>
+          
           <span class="pcard-type">Web</span>
         </div>
       </a>
@@ -649,7 +720,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Sitio web</p>
           <p class="pcard-title">Estudio Murale</p>
-          <p class="pcard-desc">Sitio corporativo para estudio de diseño.</p>
+          
           <span class="pcard-type">Web</span>
         </div>
       </a>
@@ -661,7 +732,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Sitio personal</p>
           <p class="pcard-title">Lukas Garrido</p>
-          <p class="pcard-desc">Portafolio personal.</p>
+          
           <span class="pcard-type">Web</span>
         </div>
       </a>
@@ -673,7 +744,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Bárbara Fuentes</p>
           <p class="pcard-title">Musa Pole Championship</p>
-          <p class="pcard-desc">Landing para campeonato de pole.</p>
+          
           <span class="pcard-type">Web</span>
         </div>
       </a>
@@ -685,7 +756,7 @@ footer {
         <div class="pcard-body">
           <p class="pcard-client">Bárbara Fuentes</p>
           <p class="pcard-title">Elevate Aerial</p>
-          <p class="pcard-desc">Sitio para academia de aerial arts.</p>
+          
           <span class="pcard-type">Web</span>
         </div>
       </a>
@@ -754,11 +825,11 @@ footer {
 function filterPortfolio(cat, btn) {
   document.querySelectorAll('.ptab').forEach(function(t) { t.classList.remove('active'); });
   btn.classList.add('active');
-  document.querySelectorAll('.pcard').forEach(function(c) {
+  document.querySelectorAll('.pitem').forEach(function(c) {
     if (cat === 'todos' || c.dataset.cat === cat) {
-      c.classList.add('visible');
+      c.classList.remove('hidden');
     } else {
-      c.classList.remove('visible');
+      c.classList.add('hidden');
     }
   });
 }
