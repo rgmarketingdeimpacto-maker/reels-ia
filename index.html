@@ -84,7 +84,7 @@ nav {
   content: ''; display: block; width: 20px; height: 1px; background: var(--red);
 }
 .hero h1 {
-  font-size: clamp(2.4rem, 10vw, 5rem);
+  font-size: clamp(1.5rem, 5.5vw, 2.75rem);
   font-weight: 900; line-height: 1.0;
   letter-spacing: -0.04em; color: var(--white);
   margin-bottom: 1rem;
@@ -322,6 +322,33 @@ footer {
   font-size: 12px; color: #333;
 }
 
+/* ── SPLASH ── */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0A0A0A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#splash.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+#splash img {
+  width: 100px;
+  height: auto;
+  animation: splashPulse 0.8s ease-out;
+}
+@keyframes splashPulse {
+  0%   { opacity: 0; transform: scale(0.85); }
+  60%  { opacity: 1; transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* ── ANIMATIONS ── */
 @media (prefers-reduced-motion: no-preference) {
   .fade-in { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
@@ -331,10 +358,15 @@ footer {
 </head>
 <body>
 
+<!-- SPLASH -->
+<div id="splash">
+  <img src="LogoWeb.png" alt="Marketing de Impacto">
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="#" style="display:flex;align-items:center;text-decoration:none;">
-    <img src="LogoWeb.png" alt="Marketing de Impacto" style="height:36px;width:auto;display:block;">
+    <img src="LogoWeb.png" alt="Marketing de Impacto" style="height:48px;width:auto;display:block;">
   </a>
   <a href="https://wa.me/56967792837?text=Hola%2C%20quiero%20hablar%20de%20mi%20proyecto" class="nav-cta" target="_blank" rel="noopener">Hablemos</a>
 </nav>
@@ -490,280 +522,7 @@ footer {
     </div>
   </div>
 </section>
-  <div class="section-inner">
-    <span class="section-tag fade-in">Trabajos</span>
-    <h2 class="section-title fade-in">Portafolio</h2>
-    <p class="section-body fade-in">Proyectos reales para clientes reales.</p>
 
-    <div class="portfolio-tabs fade-in">
-      <button class="ptab active" onclick="filterPortfolio('todos', this)">Todos</button>
-      <button class="ptab" onclick="filterPortfolio('redfox', this)">RedFox</button>
-      <button class="ptab" onclick="filterPortfolio('hedonico', this)">Hedónico</button>
-      <button class="ptab" onclick="filterPortfolio('origen', this)">Origen</button>
-      <button class="ptab" onclick="filterPortfolio('web', this)">Web</button>
-    </div>
-
-    <div class="portfolio-grid fade-in">
-
-      <!-- REDFOX -->
-      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZbOCu_AvDZ/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">RedFox</p>
-          <p class="pcard-title">Buen tiempo = posible recompensa</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZcwbvkg_Km/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">RedFox</p>
-          <p class="pcard-title">Transferencia RedFox</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZcxvvfgEld/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">RedFox</p>
-          <p class="pcard-title">Zapatillas</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLaEBghu5/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">RedFox</p>
-          <p class="pcard-title">El Cuñado</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLi4zARc_/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">RedFox</p>
-          <p class="pcard-title">El que canta en la ducha</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLtLbgumR/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">RedFox</p>
-          <p class="pcard-title">La caída</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMgurg53h/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">RedFox</p>
-          <p class="pcard-title">Llegan lucas (mujer)</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="redfox" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMvr_AtDX/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">RedFox</p>
-          <p class="pcard-title">Llegan lucas (hombre)</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <!-- HEDÓNICO -->
-      <a class="pcard visible" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLAfcgCSF/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Hedónico</p>
-          <p class="pcard-title">Cocina</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfLL-rgQ2j/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Hedónico</p>
-          <p class="pcard-title">Clóset</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfL4QBgzrj/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Hedónico</p>
-          <p class="pcard-title">Vanitorio</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="hedonico" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZfMCIHA6Qj/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Hedónico</p>
-          <p class="pcard-title">Quincho</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <!-- ORIGEN -->
-      <a class="pcard visible" data-cat="origen" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZi73r3gZBz/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Origen Psicología</p>
-          <p class="pcard-title">Universitaria</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="origen" href="https://www.instagram.com/marketingdeimpacto.cl/reel/DZi8HfmAEC6/" target="_blank" rel="noopener">
-        <div class="pcard-thumb">
-          <div class="pcard-play"><div class="pcard-play-btn"><svg viewBox="0 0 16 16"><polygon points="3,1 15,8 3,15"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Origen Psicología</p>
-          <p class="pcard-title">Pareja</p>
-          
-          <span class="pcard-type">Reel · IG</span>
-        </div>
-      </a>
-
-      <!-- WEB -->
-      <a class="pcard visible" data-cat="web" href="https://rgarrido2020.github.io/lapaltaperfecta/" target="_blank" rel="noopener">
-        <div class="pcard-thumb web">
-          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Landing</p>
-          <p class="pcard-title">La Palta Perfecta</p>
-          
-          <span class="pcard-type">Web</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="web" href="https://rgarrido2020.github.io/Weekend-Piano/" target="_blank" rel="noopener">
-        <div class="pcard-thumb web">
-          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Landing</p>
-          <p class="pcard-title">Weekend Piano</p>
-          
-          <span class="pcard-type">Web</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="web" href="https://concertoprivato.github.io/concerto/" target="_blank" rel="noopener">
-        <div class="pcard-thumb web">
-          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Sitio web</p>
-          <p class="pcard-title">Concerto Privato</p>
-          
-          <span class="pcard-type">Web</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="web" href="https://estudiomurale.com/" target="_blank" rel="noopener">
-        <div class="pcard-thumb web">
-          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Sitio web</p>
-          <p class="pcard-title">Estudio Murale</p>
-          
-          <span class="pcard-type">Web</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="web" href="https://lukasgarrich.github.io/lukasgarrich/" target="_blank" rel="noopener">
-        <div class="pcard-thumb web">
-          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Sitio personal</p>
-          <p class="pcard-title">Lukas Garrido</p>
-          
-          <span class="pcard-type">Web</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="web" href="https://fotosvideos.github.io/musa/" target="_blank" rel="noopener">
-        <div class="pcard-thumb web">
-          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Bárbara Fuentes</p>
-          <p class="pcard-title">Musa Pole Championship</p>
-          
-          <span class="pcard-type">Web</span>
-        </div>
-      </a>
-
-      <a class="pcard visible" data-cat="web" href="https://sage-lolly-46c025.netlify.app/" target="_blank" rel="noopener">
-        <div class="pcard-thumb web">
-          <div class="pcard-play"><div class="pcard-web-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div></div>
-        </div>
-        <div class="pcard-body">
-          <p class="pcard-client">Bárbara Fuentes</p>
-          <p class="pcard-title">Elevate Aerial</p>
-          
-          <span class="pcard-type">Web</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
 
 <!-- CÓMO TRABAJAMOS -->
 <section class="steps-section">
@@ -822,6 +581,12 @@ footer {
 </footer>
 
 <script>
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('splash').classList.add('hidden');
+  }, 900);
+});
+
 function filterPortfolio(cat, btn) {
   document.querySelectorAll('.ptab').forEach(function(t) { t.classList.remove('active'); });
   btn.classList.add('active');
