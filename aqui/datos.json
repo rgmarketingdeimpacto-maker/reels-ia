@@ -12,6 +12,16 @@
       "nombre": "Reel Cocina 01",
       "archivo": "reel-cocina-01.mp4",
       "tipo": "video",
+      "estado": "listo",
+      "nota": "Patrón Transformación · Antes y Después",
+      "logo": "logo.png",
+      "concepto": "Mostrar que una cocina no nace con los materiales, sino con una visión. El video parte desde una representación simple del proyecto —un espacio blanco con líneas arquitectónicas— y acompaña a la protagonista mientras esa idea se transforma en una cocina terminada.\n\nLa decisión creativa fue utilizar la transformación como recurso principal: pasar de un concepto abstracto a un resultado tangible, destacando cubiertas, terminaciones y detalles que convierten un sueño en un espacio real.\nLa emoción buscada es la satisfacción de ver una idea materializada y descubrir que el resultado puede superar lo que se había imaginado.",
+      "audio": ""
+    },
+    {
+      "nombre": "Reel Cocina 01",
+      "archivo": "reel-cocina-01.mp4",
+      "tipo": "video",
       "estado": "produccion",
       "nota": "Patrón Transformación · Antes y Después",
       "logo": "logo.png",
