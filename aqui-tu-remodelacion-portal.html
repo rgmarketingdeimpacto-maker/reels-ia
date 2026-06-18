@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal — Aquí Tu Remodelación</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cafe: #2C1810;
+    --cafe-medio: #4A2C1A;
+    --cafe-claro: #8B5E3C;
+    --crema: #F5F0EB;
+    --crema-oscura: #EDE5DC;
+    --blanco: #FFFFFF;
+    --texto: #1A1A1A;
+    --texto-suave: #6B6B6B;
+    --verde: #4CAF7D;
+    --amarillo: #F5A623;
+    --rojo: #E05C5C;
+    --borde: #E0D8CF;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--crema); color: var(--texto); min-height: 100vh; }
+
+  /* SIDEBAR */
+  .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 260px; background: var(--cafe); display: flex; flex-direction: column; z-index: 100; }
+  .sidebar-logo { padding: 28px 24px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 14px; }
+  .sidebar-logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,0.1); }
+  .sidebar-logo-text { color: var(--blanco); font-size: 13px; font-weight: 600; line-height: 1.3; }
+  .sidebar-logo-sub { color: rgba(255,255,255,0.5); font-size: 11px; margin-top: 2px; }
+  .sidebar-nav { padding: 20px 12px; flex: 1; overflow-y: auto; }
+  .nav-label { color: rgba(255,255,255,0.35); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0 12px; margin-bottom: 8px; margin-top: 20px; }
+  .nav-label:first-child { margin-top: 0; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: rgba(255,255,255,0.65); font-size: 13.5px; cursor: pointer; transition: all 0.15s; }
+  .nav-item:hover { background: rgba(255,255,255,0.08); color: var(--blanco); }
+  .nav-item.active { background: rgba(255,255,255,0.12); color: var(--blanco); font-weight: 500; }
+  .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+  .sidebar-footer { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); font-size: 11px; display: flex; align-items: center; justify-content: space-between; }
+  .admin-toggle { cursor: pointer; font-size: 11px; color: rgba(255,255,255,0.4); text-decoration: underline; }
+  .admin-toggle:hover { color: var(--blanco); }
+
+  /* MAIN */
+  .main { margin-left: 260px; min-height: 100vh; }
+  .topbar { background: var(--blanco); border-bottom: 1px solid var(--borde); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+  .topbar-title { font-size: 15px; font-weight: 600; }
+  .topbar-sub { font-size: 12px; color: var(--texto-suave); margin-top: 2px; }
+  .topbar-badge { background: var(--cafe); color: var(--blanco); font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .menu-toggle { display: none; background: none; border: none; font-size: 22px; cursor: pointer; padding: 4px 8px; color: var(--cafe); line-height: 1; }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 99; }
+  .admin-badge { background: var(--rojo); color: var(--blanco); font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 20px; }
+  .content { padding: 32px; }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* SECTION */
+  .section { margin-bottom: 40px; }
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .section-title { font-size: 16px; font-weight: 600; }
+  .section-link { font-size: 12px; color: var(--cafe-claro); cursor: pointer; font-weight: 500; }
+
+  /* METRICS */
+  .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .metric-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 12px; padding: 20px; position: relative; }
+  .metric-label { font-size: 11px; color: var(--texto-suave); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .metric-value { font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+  .metric-change { font-size: 12px; font-weight: 500; }
+  .metric-change.neutral { color: var(--texto-suave); }
+  .metric-placeholder { font-size: 22px; font-weight: 700; color: var(--borde); }
+
+  /* CONTENT GRID */
+  .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .content-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 12px; overflow: hidden; }
+  .content-thumb { width: 100%; aspect-ratio: 9/16; background: var(--crema-oscura); display: flex; align-items: center; justify-content: center; position: relative; max-height: 280px; overflow: hidden; }
+  .content-thumb img, .content-thumb video { width: 100%; height: 100%; object-fit: cover; }
+  .content-thumb-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--cafe-claro); opacity: 0.5; }
+  .content-thumb-icon { font-size: 32px; }
+  .content-thumb-text { font-size: 11px; font-weight: 500; }
+  .content-thumb-badge { position: absolute; top: 10px; right: 10px; background: var(--verde); color: white; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 10px; z-index: 2; }
+  .content-thumb-badge.pending { background: var(--amarillo); color: var(--texto); }
+  .content-info { padding: 14px 16px; }
+  .content-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .content-date { font-size: 11px; color: var(--texto-suave); margin-bottom: 12px; }
+  .content-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* BUTTONS */
+  .btn { font-size: 12px; font-weight: 500; padding: 7px 14px; border-radius: 7px; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-primary { background: var(--cafe); color: var(--blanco); }
+  .btn-primary:hover { background: var(--cafe-medio); }
+  .btn-secondary { background: var(--crema-oscura); color: var(--texto); border: 1px solid var(--borde); }
+  .btn-secondary:hover { background: var(--borde); }
+  .btn-danger { background: var(--rojo); color: var(--blanco); }
+  .btn-sm { font-size: 11px; padding: 5px 10px; }
+
+  /* IDEAS */
+  .ideas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .idea-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px; padding: 16px; display: flex; gap: 12px; }
+  .idea-num { width: 28px; height: 28px; background: var(--crema-oscura); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--cafe-claro); flex-shrink: 0; }
+  .idea-text { font-size: 13px; line-height: 1.5; }
+  .idea-tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 6px; margin-top: 6px; background: var(--crema-oscura); color: var(--cafe-claro); }
+
+  /* BIBLIOTECA */
+  .biblioteca-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .bib-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px; padding: 16px; text-align: center; }
+  .bib-icon { font-size: 28px; margin-bottom: 8px; }
+  .bib-card img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; margin: 0 auto 8px; display: block; }
+  .bib-label { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .bib-sub { font-size: 11px; color: var(--texto-suave); }
+  .color-swatches { display: flex; gap: 6px; justify-content: center; margin-top: 8px; }
+  .swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--borde); }
+  .photo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+  .photo-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--borde); }
+
+  /* STATUS */
+  .status-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .status-item { display: flex; align-items: center; gap: 7px; font-size: 13px; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .status-dot.verde { background: var(--verde); }
+  .status-dot.amarillo { background: var(--amarillo); }
+  .status-dot.gris { background: var(--borde); }
+
+  /* PLACEHOLDER PAGE */
+  .placeholder-page { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; gap: 16px; }
+  .placeholder-page .big-icon { font-size: 56px; }
+  .placeholder-page h2 { font-size: 20px; font-weight: 600; }
+  .placeholder-page p { font-size: 14px; color: var(--texto-suave); max-width: 360px; line-height: 1.6; }
+
+  /* METRICAS PAGE */
+  .metricas-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .chart-placeholder { background: var(--blanco); border: 1px solid var(--borde); border-radius: 12px; padding: 24px; height: 200px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: var(--texto-suave); font-size: 13px; }
+  .chart-placeholder .chart-icon { font-size: 36px; opacity: 0.3; }
+
+  /* REUNIONES */
+  .reunion-list { display: flex; flex-direction: column; gap: 12px; }
+  .reunion-item { background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .reunion-left { display: flex; gap: 14px; align-items: center; }
+  .reunion-icon { font-size: 24px; }
+  .reunion-title { font-size: 13px; font-weight: 600; }
+  .reunion-date { font-size: 12px; color: var(--texto-suave); margin-top: 2px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 8px; }
+  .tag-cafe { background: rgba(44,24,16,0.08); color: var(--cafe); }
+  .tag-verde { background: rgba(76,175,125,0.12); color: #2E7D52; }
+  .tag-amarillo { background: rgba(245,166,35,0.15); color: #9A6800; }
+
+  /* COMPETENCIA */
+  .comp-table { width: 100%; border-collapse: collapse; background: var(--blanco); border-radius: 12px; overflow: hidden; border: 1px solid var(--borde); }
+  .comp-table th { background: var(--cafe); color: var(--blanco); padding: 12px 16px; font-size: 12px; font-weight: 600; text-align: left; }
+  .comp-table td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid var(--borde); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr:nth-child(even) td { background: var(--crema); }
+
+  /* ADMIN MODE */
+  .edit-field { display: none; }
+  body.admin-mode .edit-field { display: block; }
+  body.admin-mode .view-only { opacity: 0.4; }
+  .admin-panel { background: var(--blanco); border: 1px dashed var(--cafe-claro); border-radius: 10px; padding: 16px; margin-top: 12px; }
+  .admin-panel label { display: block; font-size: 11px; font-weight: 600; color: var(--texto-suave); margin-bottom: 4px; margin-top: 10px; }
+  .admin-panel label:first-child { margin-top: 0; }
+  .admin-panel input, .admin-panel textarea, .admin-panel select { width: 100%; padding: 8px 10px; border: 1px solid var(--borde); border-radius: 6px; font-size: 13px; font-family: inherit; }
+  .admin-panel textarea { resize: vertical; min-height: 50px; }
+  .admin-card-controls { display: flex; gap: 6px; margin-top: 10px; }
+  .admin-login-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+  .admin-login-box { background: var(--blanco); border-radius: 12px; padding: 28px; width: 320px; }
+  .admin-login-box h3 { font-size: 16px; margin-bottom: 6px; }
+  .admin-login-box p { font-size: 12px; color: var(--texto-suave); margin-bottom: 16px; }
+  .admin-login-box input { width: 100%; padding: 10px 12px; border: 1px solid var(--borde); border-radius: 8px; font-size: 14px; margin-bottom: 12px; }
+  .admin-login-box .row { display: flex; gap: 8px; }
+  .admin-login-box .row button { flex: 1; padding: 10px; }
+  .save-toast { position: fixed; bottom: 24px; right: 24px; background: var(--cafe); color: var(--blanco); padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 500; z-index: 2000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .save-toast.show { opacity: 1; }
+  .add-card-btn { background: var(--crema-oscura); border: 1px dashed var(--cafe-claro); border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; color: var(--cafe-claro); font-weight: 500; min-height: 120px; }
+
+  /* EXPORT JSON */
+  .export-json-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; z-index: 1500; padding: 20px; }
+  .export-json-box { background: var(--blanco); border-radius: 12px; padding: 24px; width: 100%; max-width: 560px; }
+  .export-json-box h3 { font-size: 16px; margin-bottom: 6px; }
+  .export-json-box p { font-size: 12.5px; color: var(--texto-suave); margin-bottom: 14px; line-height: 1.5; }
+  .export-json-box code { background: var(--crema-oscura); padding: 1px 5px; border-radius: 4px; font-size: 11.5px; }
+  .export-json-box textarea { width: 100%; height: 220px; font-family: 'Courier New', monospace; font-size: 11px; padding: 10px; border: 1px solid var(--borde); border-radius: 8px; resize: vertical; margin-bottom: 14px; }
+  .export-json-box .row { display: flex; gap: 8px; justify-content: flex-end; }
+
+  /* BIBLIOTECA - SETS DE CONTENIDO */
+  .set-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+  .set-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .set-card-title { font-size: 13.5px; font-weight: 600; }
+  .set-card-nota { font-size: 11.5px; color: var(--texto-suave); margin-top: 2px; }
+  .set-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .set-block { background: var(--crema); border-radius: 10px; padding: 12px; }
+  .set-block-label { font-size: 10.5px; font-weight: 600; color: var(--cafe-claro); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .set-block video, .set-block img { width: 100%; border-radius: 8px; display: block; max-height: 320px; object-fit: contain; background: var(--crema-oscura); }
+  .set-block.logo-block { display: flex; align-items: center; gap: 10px; }
+  .set-block.logo-block img { width: 48px; height: 48px; object-fit: cover; border-radius: 8px; max-height: none; }
+  .set-block-empty { font-size: 12px; color: var(--texto-suave); opacity: 0.6; padding: 16px 0; text-align: center; }
+  .set-concepto { font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; }
+  /* Disuasión básica de descarga (no es un bloqueo real, ver nota) */
+  .no-download { -webkit-touch-callout: none; }
+
+  /* ───────── RESPONSIVE: TABLET ───────── */
+  @media (max-width: 1024px) {
+    .metrics-grid, .metricas-grid-full { grid-template-columns: repeat(2, 1fr); }
+    .content-grid, .biblioteca-grid { grid-template-columns: repeat(2, 1fr); }
+    .ideas-grid { grid-template-columns: 1fr; }
+    .set-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ───────── RESPONSIVE: MOBILE ───────── */
+  @media (max-width: 720px) {
+    .menu-toggle { display: block; }
+    .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; box-shadow: 4px 0 24px rgba(0,0,0,0.25); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-overlay.open { display: block; }
+    .main { margin-left: 0; }
+    .topbar { padding: 12px 16px; flex-wrap: nowrap; gap: 8px; }
+    .topbar-title { font-size: 14px; }
+    .topbar-sub { font-size: 11px; max-width: 180px; }
+    .topbar-badge, .admin-badge { font-size: 10px; padding: 4px 10px; flex-shrink: 0; }
+    .content { padding: 16px; }
+    .section { margin-bottom: 28px; }
+    .section-title { font-size: 14.5px; }
+
+    .metrics-grid, .metricas-grid-full { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .metric-card { padding: 14px; }
+    .metric-value { font-size: 22px; }
+
+    .content-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .biblioteca-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .ideas-grid { grid-template-columns: 1fr; }
+    .photo-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .set-grid { grid-template-columns: 1fr; gap: 10px; }
+    .set-card { padding: 14px; }
+
+    .comp-table-wrap { overflow-x: auto; border-radius: 12px; -webkit-overflow-scrolling: touch; box-shadow: inset -12px 0 12px -12px rgba(0,0,0,0.15); }
+    .comp-table { display: block; white-space: nowrap; }
+
+    .reunion-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+    .admin-login-box, .export-json-box { width: 100%; max-width: 340px; padding: 20px; }
+    .export-json-box textarea { height: 160px; font-size: 10px; }
+
+    .sidebar-footer { font-size: 10px; }
+  }
+
+  @media (max-width: 360px) {
+    .content-grid, .biblioteca-grid { grid-template-columns: 1fr; }
+    .photo-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="admin-login-overlay" id="login-overlay" style="display:none;">
+  <div class="admin-login-box">
+    <h3>Modo Admin</h3>
+    <p>Ingresa la clave para editar este portal.</p>
+    <input type="password" id="admin-pass" placeholder="Clave" onkeydown="if(event.key==='Enter') tryLogin()">
+    <div class="row">
+      <button class="btn btn-secondary" onclick="closeLogin()">Cancelar</button>
+      <button class="btn btn-primary" onclick="tryLogin()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="save-toast" id="save-toast">Guardado ✓</div>
+
+<div class="export-json-overlay edit-field" id="export-json-box" style="display:none;">
+  <div class="export-json-box">
+    <h3>Subir cambios a GitHub</h3>
+    <p>Copia este JSON y reemplaza el archivo <code>datos.json</code> en la carpeta <code>Aqui/</code> de tu repo. El cliente verá los cambios en cuanto subas el archivo.</p>
+    <textarea id="export-json-text" readonly onclick="this.select()"></textarea>
+    <div class="row">
+      <button class="btn btn-secondary" onclick="document.getElementById('export-json-box').style.display='none'">Cerrar</button>
+      <button class="btn btn-secondary" id="copy-json-btn" onclick="copyExportJson()">Copiar</button>
+      <button class="btn btn-primary" onclick="downloadExportJson()">Descargar datos.json</button>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img id="sb-logo" src="logo.png" alt="Aquí Tu Remodelación" onerror="this.style.opacity=0.3">
+    <div>
+      <div class="sidebar-logo-text" id="sb-name">Aquí Tu Remodelación</div>
+      <div class="sidebar-logo-sub">Portal de Marketing</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-label">Principal</div>
+    <div class="nav-item active" onclick="showPage('resumen', this)"><span class="nav-icon">📊</span> Resumen</div>
+    <div class="nav-item" onclick="showPage('contenido', this)"><span class="nav-icon">🎬</span> Contenido</div>
+    <div class="nav-item" onclick="showPage('ideas', this)"><span class="nav-icon">💡</span> Ideas IA</div>
+    <div class="nav-label">Marca</div>
+    <div class="nav-item" onclick="showPage('biblioteca', this)"><span class="nav-icon">🗂</span> Biblioteca</div>
+    <div class="nav-item" onclick="showPage('sitioweb', this)"><span class="nav-icon">🌐</span> Sitio Web</div>
+    <div class="nav-label">Gestión</div>
+    <div class="nav-item" onclick="showPage('automatizaciones', this)"><span class="nav-icon">⚡</span> Automatizaciones</div>
+    <div class="nav-item" onclick="showPage('competencia', this)"><span class="nav-icon">🏆</span> Competencia</div>
+    <div class="nav-item" onclick="showPage('reuniones', this)"><span class="nav-icon">📅</span> Reuniones</div>
+    <div class="nav-item" onclick="showPage('metricas', this)"><span class="nav-icon">📈</span> Métricas</div>
+  </nav>
+  <div class="sidebar-footer">
+    <span>Powered by Marketing de Impacto</span>
+    <span class="admin-toggle" id="admin-toggle" onclick="toggleAdmin()">Admin</span>
+  </div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button class="menu-toggle" id="menu-toggle" onclick="toggleSidebar()" aria-label="Abrir menú">☰</button>
+      <div>
+        <div class="topbar-title" id="topbar-title">Bienvenidos 👋</div>
+        <div class="topbar-sub" id="topbar-sub">Este es tu espacio privado de marketing.</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="admin-badge" id="admin-badge" style="display:none;">Editando</span>
+      <div class="topbar-badge" id="topbar-updated">Plan Activo</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- RESUMEN -->
+    <div class="page active" id="page-resumen">
+      <div class="section">
+        <div class="section-header"><div class="section-title">Resumen del mes</div></div>
+        <div class="metrics-grid" id="metrics-grid"></div>
+        <div class="admin-panel edit-field">
+          <label>Seguidores IG</label><input id="m-seguidores" placeholder="ej: 1.240">
+          <label>Alcance 30 días</label><input id="m-alcance" placeholder="ej: 18.500">
+          <label>Leads recibidos</label><input id="m-leads" placeholder="ej: 12">
+          <label>Contenidos publicados este mes</label><input id="m-publicados" placeholder="ej: 3">
+          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="saveMetrics()">Guardar métricas</button>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-header"><div class="section-title">Contenido reciente</div><div class="section-link" onclick="document.querySelector('[onclick*=contenido]').click()">Ver todo →</div></div>
+        <div class="content-grid" id="resumen-content-preview"></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><div class="section-title">Automatizaciones</div></div>
+        <div class="status-row" id="resumen-automatizaciones"></div>
+      </div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="page" id="page-contenido">
+      <div class="section">
+        <div class="section-header"><div class="section-title">Todos los contenidos</div></div>
+        <div class="content-grid" id="contenido-grid"></div>
+        <div class="admin-panel edit-field" style="margin-top:20px;">
+          <strong style="font-size:13px;">Agregar nuevo contenido</strong>
+          <label>Nombre</label><input id="c-nombre" placeholder="ej: Reel Cocina 02">
+          <label>Video (ruta relativa, ej: reel-cocina-02.mp4)</label><input id="c-archivo" placeholder="nombre-archivo.mp4">
+          <label>Tipo</label>
+          <select id="c-tipo"><option value="video">Video</option><option value="imagen">Imagen</option></select>
+          <label>Estado</label>
+          <select id="c-estado"><option value="listo">Listo</option><option value="produccion">En producción</option></select>
+          <label>Nota / descripción</label><input id="c-nota" placeholder="ej: Patrón Transformación">
+          <label>Logo usado (ruta relativa)</label><input id="c-logo" placeholder="logo.png">
+          <label>Concepto / guión</label><textarea id="c-concepto" placeholder="Texto del concepto o guión del reel..."></textarea>
+          <label>Audio / música (ruta relativa, opcional)</label><input id="c-audio" placeholder="audio.mp3">
+          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="addContent()">Agregar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDEAS IA -->
+    <div class="page" id="page-ideas">
+      <div class="section">
+        <div class="section-header"><div class="section-title">Ideas generadas con IA</div></div>
+        <div class="ideas-grid" id="ideas-grid"></div>
+        <div class="admin-panel edit-field" style="margin-top:20px;">
+          <strong style="font-size:13px;">Agregar nueva idea</strong>
+          <label>Texto de la idea</label><textarea id="i-texto" placeholder="Describe el concepto..."></textarea>
+          <label>Categoría</label><input id="i-tag" placeholder="ej: Transformación, Testimonio, Producto">
+          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="addIdea()">Agregar idea</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BIBLIOTECA -->
+    <div class="page" id="page-biblioteca">
+      <div class="section">
+        <div class="section-header"><div class="section-title">Identidad de marca</div></div>
+        <div class="biblioteca-grid">
+          <div class="bib-card">
+            <img id="bib-logo-img" src="logo.png" onerror="this.style.display='none'" style="display:none">
+            <div class="bib-icon" id="bib-logo-icon">🔴</div>
+            <div class="bib-label">Logo</div>
+            <div class="bib-sub" id="bib-logo-sub">logo.png</div>
+          </div>
+          <div class="bib-card">
+            <div class="bib-icon">🎨</div>
+            <div class="bib-label">Colores</div>
+            <div class="color-swatches" id="bib-colors"></div>
+          </div>
+          <div class="bib-card">
+            <div class="bib-icon">🖼</div>
+            <div class="bib-label">Fotos</div>
+            <div class="bib-sub" id="bib-fotos-sub">Sin archivos aún</div>
+          </div>
+          <div class="bib-card">
+            <div class="bib-icon">🎬</div>
+            <div class="bib-label">Reels con material</div>
+            <div class="bib-sub" id="bib-videos-sub">0 archivos</div>
+          </div>
+        </div>
+        <div class="photo-grid" id="photo-grid"></div>
+        <div class="admin-panel edit-field" style="margin-top:20px;">
+          <strong style="font-size:13px;">Logo y colores de marca</strong>
+          <label>Archivo de logo (ruta relativa, ej: logo.png)</label><input id="b-logo" placeholder="logo.png">
+          <label>Color 1 (hex)</label><input id="b-color1" placeholder="#2C1810">
+          <label>Color 2 (hex)</label><input id="b-color2" placeholder="#8B5E3C">
+          <label>Color 3 (hex)</label><input id="b-color3" placeholder="#F5F0EB">
+          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="saveBranding()">Guardar marca</button>
+          <hr style="margin:16px 0;border-color:var(--borde);">
+          <strong style="font-size:13px;">Agregar foto a la biblioteca</strong>
+          <label>Archivo (ruta relativa, ej: foto-cocina-01.jpg)</label><input id="b-foto" placeholder="foto.jpg">
+          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="addPhoto()">Agregar foto</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <div class="section-title">Material de cada reel</div>
+          <div class="section-link" style="cursor:default;color:var(--texto-suave);font-weight:400;">Solo para ver y escuchar · sin descarga</div>
+        </div>
+        <div id="sets-list"></div>
+      </div>
+    </div>
+
+    <!-- SITIO WEB -->
+    <div class="page" id="page-sitioweb">
+      <div class="placeholder-page">
+        <div class="big-icon">🌐</div>
+        <h2>Sitio Web</h2>
+        <p>Acá se mostrará el estado de la landing, formularios activos y modificaciones pendientes.</p>
+        <button class="btn btn-primary">Solicitar actualización</button>
+      </div>
+    </div>
+
+    <!-- AUTOMATIZACIONES -->
+    <div class="page" id="page-automatizaciones">
+      <div class="section">
+        <div class="section-header"><div class="section-title">Automatizaciones</div></div>
+        <div style="display:flex; flex-direction:column; gap:12px;" id="automatizaciones-list"></div>
+        <div class="admin-panel edit-field" style="margin-top:20px;">
+          <p style="font-size:12px;color:var(--texto-suave);">Click en cada automatización abajo para cambiar su estado.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPETENCIA -->
+    <div class="page" id="page-competencia">
+      <div class="section">
+        <div class="section-header"><div class="section-title">Comparación con la competencia</div></div>
+        <div class="comp-table-wrap">
+          <table class="comp-table" id="comp-table">
+            <thead>
+              <tr><th>Empresa</th><th>Seguidores IG</th><th>Frecuencia de posts</th><th>Tipo de contenido</th><th>Estado</th></tr>
+            </thead>
+            <tbody id="comp-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- REUNIONES -->
+    <div class="page" id="page-reuniones">
+      <div class="section">
+        <div class="section-header"><div class="section-title">Reuniones</div></div>
+        <div class="reunion-list">
+          <div class="reunion-item">
+            <div class="reunion-left">
+              <div class="reunion-icon">📹</div>
+              <div><div class="reunion-title">Reunión de bienvenida</div><div class="reunion-date">Por agendar · Primera sesión de onboarding</div></div>
+            </div>
+            <span class="tag tag-amarillo">Por agendar</span>
+          </div>
+          <div class="reunion-item">
+            <div class="reunion-left">
+              <div class="reunion-icon">📋</div>
+              <div><div class="reunion-title">Revisión mensual</div><div class="reunion-date">Cada fin de mes · Resultados y próximos contenidos</div></div>
+            </div>
+            <span class="tag tag-cafe">Recurrente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MÉTRICAS -->
+    <div class="page" id="page-metricas">
+      <div class="section">
+        <div class="section-header"><div class="section-title">Métricas detalladas</div></div>
+        <div class="metricas-grid-full" id="metricas-full"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="chart-placeholder"><div class="chart-icon">📈</div>Crecimiento de seguidores<br><span style="font-size:11px;">Disponible al conectar Instagram</span></div>
+          <div class="chart-placeholder"><div class="chart-icon">👁</div>Alcance por contenido<br><span style="font-size:11px;">Disponible al conectar Instagram</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ───────── CONFIG ─────────
+  const ADMIN_PASSWORD = 'mdi2026'; // cámbiala si quieres
+  let DATA = null;
+  let isAdmin = false;
+
+  const titles = {
+    resumen: ['Bienvenidos 👋', 'Este es tu espacio privado de marketing.'],
+    contenido: ['Contenido', 'Todos tus reels y piezas audiovisuales.'],
+    ideas: ['Ideas IA 💡', 'Conceptos generados con inteligencia artificial para tu marca.'],
+    biblioteca: ['Biblioteca de marca', 'Logo, colores, fotos y videos de tu empresa.'],
+    sitioweb: ['Sitio Web 🌐', 'Estado actual de tu landing y modificaciones pendientes.'],
+    automatizaciones: ['Automatizaciones ⚡', 'Herramientas que trabajan por ti mientras duermes.'],
+    competencia: ['Competencia 🏆', 'Comparación con otras empresas del rubro.'],
+    reuniones: ['Reuniones 📅', 'Historial y próximas sesiones de trabajo.'],
+    metricas: ['Métricas 📈', 'Seguidores, alcance y leads en detalle.']
+  };
+
+  const DEFAULT_DATA = {
+    empresa: 'Aquí Tu Remodelación',
+    actualizado: '',
+    metrics: { seguidores: '', alcance: '', leads: '', publicados: '0' },
+    content: [
+      { nombre: 'Reel Cocina 01', archivo: '', tipo: 'video', estado: 'produccion', nota: 'Patrón Transformación · Antes y Después', logo: 'logo.png', concepto: '', audio: '' }
+    ],
+    ideas: [
+      { texto: 'Antes y después de una cocina: de la frustración cotidiana a la satisfacción total.', tag: 'Transformación' },
+      { texto: 'El cliente que dudó: "No sabía si valía la pena hasta que lo vi terminado."', tag: 'Testimonio' },
+      { texto: 'Clóset a medida: cada centímetro pensado para tu espacio y tu forma de vivir.', tag: 'Producto' },
+      { texto: 'El quincho que faltaba: transformar el patio en el lugar favorito de la casa.', tag: 'Transformación' }
+    ],
+    branding: { logo: 'logo.png', color1: '#2C1810', color2: '#8B5E3C', color3: '#F5F0EB' },
+    photos: [],
+    automatizaciones: [
+      { nombre: 'WhatsApp automático', desc: 'Respuestas automáticas a consultas entrantes', icon: '💬', estado: 'pendiente' },
+      { nombre: 'Seguimiento de leads', desc: 'Notificación cuando alguien consulta desde redes', icon: '🎯', estado: 'pendiente' },
+      { nombre: 'Alertas de métricas', desc: 'Reporte semanal automático al correo', icon: '🔔', estado: 'pendiente' }
+    ],
+    competencia: [
+      { empresa: 'Aquí Tu Remodelación', seguidores: '—', frecuencia: 'Por definir', tipo: 'Reels + Fotos', tu: true }
+    ]
+  };
+
+  // ───────── STORAGE (archivo datos.json en la misma carpeta) ─────────
+  async function loadData() {
+    try {
+      const res = await fetch('datos.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('No se encontró datos.json');
+      DATA = await res.json();
+    } catch (e) {
+      console.warn('No se pudo cargar datos.json, usando datos por defecto.', e);
+      DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    }
+    render();
+  }
+
+  // En modo admin no se puede escribir datos.json directamente desde el navegador
+  // (GitHub Pages es estático). En vez de eso, se actualiza la fecha y se ofrece
+  // el JSON resultante para copiar/descargar y subir al repo.
+  function saveData() {
+    DATA.actualizado = new Date().toISOString().slice(0, 10);
+    showExportPanel();
+    showToast();
+  }
+
+  function showToast() {
+    const t = document.getElementById('save-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  }
+
+  function showExportPanel() {
+    const box = document.getElementById('export-json-box');
+    const txt = document.getElementById('export-json-text');
+    if (!box || !txt) return;
+    txt.value = JSON.stringify(DATA, null, 2);
+    box.style.display = 'block';
+  }
+
+  function copyExportJson() {
+    const txt = document.getElementById('export-json-text');
+    txt.select();
+    document.execCommand('copy');
+    const btn = document.getElementById('copy-json-btn');
+    const original = btn.textContent;
+    btn.textContent = '¡Copiado!';
+    setTimeout(() => btn.textContent = original, 1500);
+  }
+
+  function downloadExportJson() {
+    const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'datos.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // ───────── ADMIN ─────────
+  function toggleAdmin() {
+    if (isAdmin) {
+      isAdmin = false;
+      document.body.classList.remove('admin-mode');
+      document.getElementById('admin-badge').style.display = 'none';
+      document.getElementById('admin-toggle').textContent = 'Admin';
+    } else {
+      document.getElementById('login-overlay').style.display = 'flex';
+      document.getElementById('admin-pass').focus();
+    }
+  }
+  function closeLogin() { document.getElementById('login-overlay').style.display = 'none'; }
+  function tryLogin() {
+    const val = document.getElementById('admin-pass').value;
+    if (val === ADMIN_PASSWORD) {
+      isAdmin = true;
+      document.body.classList.add('admin-mode');
+      document.getElementById('admin-badge').style.display = 'inline-block';
+      document.getElementById('admin-toggle').textContent = 'Salir';
+      closeLogin();
+      document.getElementById('admin-pass').value = '';
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('open');
+    } else {
+      alert('Clave incorrecta');
+    }
+  }
+
+  // ───────── RENDER ─────────
+  function render() {
+    document.getElementById('sb-name').textContent = DATA.empresa;
+    const updBadge = document.getElementById('topbar-updated');
+    if (updBadge && DATA.actualizado) {
+      const d = new Date(DATA.actualizado + 'T00:00:00');
+      const fmt = d.toLocaleDateString('es-CL', { day: 'numeric', month: 'short' });
+      updBadge.textContent = `Actualizado ${fmt}`;
+    }
+    renderMetrics();
+    renderContent();
+    renderIdeas();
+    renderBiblioteca();
+    renderSets();
+    renderAutomatizaciones();
+    renderCompetencia();
+  }
+
+  function renderMetrics() {
+    const m = DATA.metrics;
+    const grid = document.getElementById('metrics-grid');
+    grid.innerHTML = `
+      <div class="metric-card"><div class="metric-label">Seguidores IG</div>${m.seguidores ? `<div class="metric-value">${m.seguidores}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.seguidores ? 'Actualizado' : '⏳ Pendiente'}</div></div>
+      <div class="metric-card"><div class="metric-label">Alcance 30 días</div>${m.alcance ? `<div class="metric-value">${m.alcance}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.alcance ? 'Actualizado' : '⏳ Pendiente'}</div></div>
+      <div class="metric-card"><div class="metric-label">Leads recibidos</div>${m.leads ? `<div class="metric-value">${m.leads}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.leads ? 'Actualizado' : '⏳ Pendiente'}</div></div>
+      <div class="metric-card"><div class="metric-label">Contenidos publicados</div><div class="metric-value">${m.publicados || '0'}</div><div class="metric-change neutral">Este mes</div></div>
+    `;
+    document.getElementById('m-seguidores').value = m.seguidores;
+    document.getElementById('m-alcance').value = m.alcance;
+    document.getElementById('m-leads').value = m.leads;
+    document.getElementById('m-publicados').value = m.publicados;
+
+    document.getElementById('metricas-full').innerHTML = `
+      <div class="metric-card"><div class="metric-label">Seguidores IG</div>${m.seguidores ? `<div class="metric-value">${m.seguidores}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.seguidores ? 'Actualizado' : '⏳ Pendiente conexión'}</div></div>
+      <div class="metric-card"><div class="metric-label">Alcance mensual</div>${m.alcance ? `<div class="metric-value">${m.alcance}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.alcance ? 'Actualizado' : '⏳ Pendiente conexión'}</div></div>
+      <div class="metric-card"><div class="metric-label">Leads recibidos</div>${m.leads ? `<div class="metric-value">${m.leads}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.leads ? 'Actualizado' : '⏳ Pendiente conexión'}</div></div>
+    `;
+  }
+
+  function saveMetrics() {
+    DATA.metrics = {
+      seguidores: document.getElementById('m-seguidores').value,
+      alcance: document.getElementById('m-alcance').value,
+      leads: document.getElementById('m-leads').value,
+      publicados: document.getElementById('m-publicados').value
+    };
+    saveData();
+    render();
+  }
+
+  function thumbHtml(item) {
+    if (item.archivo) {
+      if (item.tipo === 'video') {
+        return `<video src="${item.archivo}" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>`;
+      } else {
+        return `<img src="${item.archivo}" alt="${item.nombre}">`;
+      }
+    }
+    return `<div class="content-thumb-placeholder"><div class="content-thumb-icon">${item.tipo === 'video' ? '🎬' : '🖼'}</div><div class="content-thumb-text">${item.estado === 'produccion' ? 'En producción' : 'Sin archivo'}</div></div>`;
+  }
+
+  function renderContent() {
+    const grid = document.getElementById('contenido-grid');
+    const preview = document.getElementById('resumen-content-preview');
+    grid.innerHTML = '';
+    preview.innerHTML = '';
+    DATA.content.forEach((item, idx) => {
+      const badge = item.estado === 'listo'
+        ? `<div class="content-thumb-badge">Listo</div>`
+        : `<div class="content-thumb-badge pending">En producción</div>`;
+      const card = `
+        <div class="content-card">
+          <div class="content-thumb">${thumbHtml(item)}${badge}</div>
+          <div class="content-info">
+            <div class="content-name">${item.nombre}</div>
+            <div class="content-date">${item.nota || ''}</div>
+            <div class="content-actions">
+              ${item.archivo ? `<button class="btn btn-secondary" onclick="window.open('${item.archivo}','_blank')">Ver</button>` : ''}
+              <div class="admin-card-controls edit-field">
+                <button class="btn btn-danger btn-sm" onclick="removeContent(${idx})">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+      grid.innerHTML += card;
+    });
+    const slice = DATA.content.slice(0, 3);
+    slice.forEach(item => {
+      const badge = item.estado === 'listo' ? `<div class="content-thumb-badge">Listo</div>` : `<div class="content-thumb-badge pending">En producción</div>`;
+      preview.innerHTML += `
+        <div class="content-card">
+          <div class="content-thumb">${thumbHtml(item)}${badge}</div>
+          <div class="content-info"><div class="content-name">${item.nombre}</div><div class="content-date">${item.nota || ''}</div></div>
+        </div>`;
+    });
+    while (preview.children.length < 3) {
+      preview.innerHTML += `<div class="content-card"><div class="content-thumb"><div class="content-thumb-placeholder"><div class="content-thumb-icon">➕</div><div class="content-thumb-text">Próximo reel</div></div></div><div class="content-info"><div class="content-name">Por definir</div><div class="content-date">—</div></div></div>`;
+    }
+  }
+
+  function addContent() {
+    const nombre = document.getElementById('c-nombre').value.trim();
+    if (!nombre) return alert('Ponle un nombre al contenido');
+    DATA.content.unshift({
+      nombre,
+      archivo: document.getElementById('c-archivo').value.trim(),
+      tipo: document.getElementById('c-tipo').value,
+      estado: document.getElementById('c-estado').value,
+      nota: document.getElementById('c-nota').value.trim(),
+      logo: document.getElementById('c-logo').value.trim(),
+      concepto: document.getElementById('c-concepto').value.trim(),
+      audio: document.getElementById('c-audio').value.trim()
+    });
+    document.getElementById('c-nombre').value = '';
+    document.getElementById('c-archivo').value = '';
+    document.getElementById('c-nota').value = '';
+    document.getElementById('c-logo').value = '';
+    document.getElementById('c-concepto').value = '';
+    document.getElementById('c-audio').value = '';
+    saveData();
+    renderContent();
+    renderSets();
+  }
+  function removeContent(idx) {
+    DATA.content.splice(idx, 1);
+    saveData();
+    renderContent();
+  }
+
+  function renderIdeas() {
+    const grid = document.getElementById('ideas-grid');
+    grid.innerHTML = '';
+    DATA.ideas.forEach((idea, idx) => {
+      grid.innerHTML += `
+        <div class="idea-card">
+          <div class="idea-num">${idx + 1}</div>
+          <div>
+            <div class="idea-text">${idea.texto}</div>
+            <span class="idea-tag">${idea.tag}</span>
+            <div class="admin-card-controls edit-field"><button class="btn btn-danger btn-sm" onclick="removeIdea(${idx})">Eliminar</button></div>
+          </div>
+        </div>`;
+    });
+  }
+  function addIdea() {
+    const texto = document.getElementById('i-texto').value.trim();
+    if (!texto) return alert('Escribe el texto de la idea');
+    DATA.ideas.unshift({ texto, tag: document.getElementById('i-tag').value.trim() || 'General' });
+    document.getElementById('i-texto').value = '';
+    document.getElementById('i-tag').value = '';
+    saveData();
+    renderIdeas();
+  }
+  function removeIdea(idx) {
+    DATA.ideas.splice(idx, 1);
+    saveData();
+    renderIdeas();
+  }
+
+  function renderBiblioteca() {
+    const b = DATA.branding;
+    document.getElementById('sb-logo').src = b.logo || 'logo.png';
+    document.getElementById('bib-logo-sub').textContent = b.logo || 'Sin archivo';
+    if (b.logo) {
+      document.getElementById('bib-logo-img').src = b.logo;
+      document.getElementById('bib-logo-img').style.display = 'block';
+      document.getElementById('bib-logo-icon').style.display = 'none';
+    }
+    document.getElementById('bib-colors').innerHTML = `
+      <div class="swatch" style="background:${b.color1}"></div>
+      <div class="swatch" style="background:${b.color2}"></div>
+      <div class="swatch" style="background:${b.color3}"></div>`;
+    document.getElementById('b-logo').value = b.logo;
+    document.getElementById('b-color1').value = b.color1;
+    document.getElementById('b-color2').value = b.color2;
+    document.getElementById('b-color3').value = b.color3;
+
+    document.getElementById('bib-fotos-sub').textContent = DATA.photos.length ? `${DATA.photos.length} archivo(s)` : 'Sin archivos aún';
+    document.getElementById('bib-videos-sub').textContent = `${DATA.content.filter(c => c.tipo === 'video' && c.archivo).length} archivo(s)`;
+
+    const pg = document.getElementById('photo-grid');
+    pg.innerHTML = '';
+    DATA.photos.forEach((p, idx) => {
+      pg.innerHTML += `<div style="position:relative;"><img src="${p}" onerror="this.style.opacity=0.2"><div class="edit-field" style="position:absolute;top:4px;right:4px;"><button class="btn btn-danger btn-sm" onclick="removePhoto(${idx})">✕</button></div></div>`;
+    });
+  }
+
+  function renderSets() {
+    const list = document.getElementById('sets-list');
+    if (!list) return;
+    list.innerHTML = '';
+    DATA.content.forEach((item) => {
+      const logo = item.logo
+        ? `<img class="no-download" src="${item.logo}" alt="Logo" oncontextmenu="return false" onerror="this.outerHTML='<div class=\\'set-block-empty\\'>Logo no disponible</div>'">`
+        : `<div class="set-block-empty">Sin logo asignado</div>`;
+      const video = item.archivo
+        ? `<video class="no-download" src="${item.archivo}" controls controlsList="nodownload" disablePictureInPicture oncontextmenu="return false" onerror="this.outerHTML='<div class=\\'set-block-empty\\'>Video no disponible</div>'"></video>`
+        : `<div class="set-block-empty">${item.estado === 'produccion' ? 'En producción' : 'Sin video aún'}</div>`;
+      const concepto = item.concepto
+        ? `<div class="set-concepto">${item.concepto}</div>`
+        : `<div class="set-block-empty">Sin concepto registrado</div>`;
+      const audio = item.audio
+        ? `<audio class="no-download" src="${item.audio}" controls controlsList="nodownload" oncontextmenu="return false" style="width:100%;" onerror="this.outerHTML='<div class=\\'set-block-empty\\'>Audio no disponible</div>'"></audio>`
+        : `<div class="set-block-empty">Sin audio adicional</div>`;
+
+      list.innerHTML += `
+        <div class="set-card">
+          <div class="set-card-header">
+            <div>
+              <div class="set-card-title">${item.nombre}</div>
+              <div class="set-card-nota">${item.nota || ''}</div>
+            </div>
+          </div>
+          <div class="set-grid">
+            <div class="set-block"><div class="set-block-label">Reel</div>${video}</div>
+            <div class="set-block logo-block"><div><div class="set-block-label">Logo</div></div>${logo}</div>
+            <div class="set-block"><div class="set-block-label">Concepto</div>${concepto}</div>
+            <div class="set-block"><div class="set-block-label">Audio</div>${audio}</div>
+          </div>
+        </div>`;
+    });
+    if (!DATA.content.length) {
+      list.innerHTML = `<div class="set-block-empty" style="padding:30px 0;">Todavía no hay reels cargados.</div>`;
+    }
+  }
+  function saveBranding() {
+    DATA.branding = {
+      logo: document.getElementById('b-logo').value.trim() || 'logo.png',
+      color1: document.getElementById('b-color1').value.trim() || '#2C1810',
+      color2: document.getElementById('b-color2').value.trim() || '#8B5E3C',
+      color3: document.getElementById('b-color3').value.trim() || '#F5F0EB'
+    };
+    saveData();
+    renderBiblioteca();
+  }
+  function addPhoto() {
+    const archivo = document.getElementById('b-foto').value.trim();
+    if (!archivo) return alert('Indica el nombre de archivo');
+    DATA.photos.push(archivo);
+    document.getElementById('b-foto').value = '';
+    saveData();
+    renderBiblioteca();
+  }
+  function removePhoto(idx) {
+    DATA.photos.splice(idx, 1);
+    saveData();
+    renderBiblioteca();
+  }
+
+  function renderAutomatizaciones() {
+    const list = document.getElementById('automatizaciones-list');
+    const resumenRow = document.getElementById('resumen-automatizaciones');
+    list.innerHTML = '';
+    resumenRow.innerHTML = '';
+    DATA.automatizaciones.forEach((a, idx) => {
+      const tagClass = a.estado === 'activo' ? 'tag-verde' : 'tag-amarillo';
+      const tagText = a.estado === 'activo' ? 'Activo' : 'Por activar';
+      const dotClass = a.estado === 'activo' ? 'verde' : 'gris';
+      list.innerHTML += `
+        <div style="background:var(--blanco);border:1px solid var(--borde);border-radius:10px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="toggleAutomatizacion(${idx})">
+          <div style="display:flex;align-items:center;gap:14px;"><span style="font-size:24px;">${a.icon}</span><div><div style="font-size:13px;font-weight:600;">${a.nombre}</div><div style="font-size:12px;color:var(--texto-suave);margin-top:2px;">${a.desc}</div></div></div>
+          <span class="tag ${tagClass}">${tagText}</span>
+        </div>`;
+      resumenRow.innerHTML += `<div class="status-item"><div class="status-dot ${dotClass}"></div> ${a.nombre} — ${tagText}</div>`;
+    });
+  }
+  function toggleAutomatizacion(idx) {
+    if (!isAdmin) return;
+    DATA.automatizaciones[idx].estado = DATA.automatizaciones[idx].estado === 'activo' ? 'pendiente' : 'activo';
+    saveData();
+    renderAutomatizaciones();
+  }
+
+  function renderCompetencia() {
+    const tbody = document.getElementById('comp-tbody');
+    tbody.innerHTML = '';
+    DATA.competencia.forEach(c => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${c.tu ? `<strong>${c.empresa}</strong>` : c.empresa}</td>
+          <td>${c.seguidores}</td>
+          <td>${c.frecuencia}</td>
+          <td>${c.tipo}</td>
+          <td><span class="tag ${c.tu ? 'tag-verde' : 'tag-amarillo'}">${c.tu ? 'Tu marca' : 'Por mapear'}</span></td>
+        </tr>`;
+    });
+  }
+
+  // ───────── NAV ─────────
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar-overlay').classList.toggle('open');
+  }
+
+  function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    if (el) el.classList.add('active');
+    document.getElementById('topbar-title').textContent = titles[id][0];
+    document.getElementById('topbar-sub').textContent = titles[id][1];
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+    window.scrollTo(0, 0);
+  }
+
+  loadData();
+</script>
+</body>
+</html>
