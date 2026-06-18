@@ -20,10 +20,22 @@
     }
   ],
   "ideas": [
-    { "texto": "Antes y después de una cocina: de la frustración cotidiana a la satisfacción total.", "tag": "Transformación" },
-    { "texto": "El cliente que dudó: \"No sabía si valía la pena hasta que lo vio terminado.\"", "tag": "Testimonio" },
-    { "texto": "Clóset a medida: cada centímetro pensado para tu espacio y tu forma de vivir.", "tag": "Producto" },
-    { "texto": "El quincho que faltaba: transformar el patio en el lugar favorito de la casa.", "tag": "Transformación" }
+    {
+      "texto": "Antes y después de una cocina: de la frustración cotidiana a la satisfacción total.",
+      "tag": "Transformación"
+    },
+    {
+      "texto": "El cliente que dudó: \"No sabía si valía la pena hasta que lo vio terminado.\"",
+      "tag": "Testimonio"
+    },
+    {
+      "texto": "Clóset a medida: cada centímetro pensado para tu espacio y tu forma de vivir.",
+      "tag": "Producto"
+    },
+    {
+      "texto": "El quincho que faltaba: transformar el patio en el lugar favorito de la casa.",
+      "tag": "Transformación"
+    }
   ],
   "branding": {
     "logo": "logo.png",
@@ -33,11 +45,52 @@
   },
   "photos": [],
   "automatizaciones": [
-    { "nombre": "WhatsApp automático", "desc": "Respuestas automáticas a consultas entrantes", "icon": "💬", "estado": "pendiente" },
-    { "nombre": "Seguimiento de leads", "desc": "Notificación cuando alguien consulta desde redes", "icon": "🎯", "estado": "pendiente" },
-    { "nombre": "Alertas de métricas", "desc": "Reporte semanal automático al correo", "icon": "🔔", "estado": "pendiente" }
+    {
+      "nombre": "WhatsApp automático",
+      "desc": "Respuestas automáticas a consultas entrantes",
+      "icon": "💬",
+      "estado": "pendiente"
+    },
+    {
+      "nombre": "Seguimiento de leads",
+      "desc": "Notificación cuando alguien consulta desde redes",
+      "icon": "🎯",
+      "estado": "pendiente"
+    },
+    {
+      "nombre": "Alertas de métricas",
+      "desc": "Reporte semanal automático al correo",
+      "icon": "🔔",
+      "estado": "pendiente"
+    }
   ],
   "competencia": [
-    { "empresa": "Aquí Tu Remodelación", "seguidores": "—", "frecuencia": "Por definir", "tipo": "Reels + Fotos", "tu": true }
-  ]
+    {
+      "empresa": "Aquí Tu Remodelación",
+      "seguidores": "—",
+      "frecuencia": "Por definir",
+      "tipo": "Reels + Fotos",
+      "tu": true
+    }
+  ],
+  "redes": {
+    "ig": {
+      "seguidores": "1317",
+      "seguidos": "10",
+      "publicaciones": "107",
+      "url": "https://www.instagram.com/aquituremodelacionchile/"
+    },
+    "linkedin": {
+      "seguidores": "",
+      "publicaciones": "",
+      "url": ""
+    },
+    "facebook": {
+      "seguidores": "",
+      "seguidos": "",
+      "publicaciones": "",
+      "url": ""
+    },
+    "sitioweb": "https://servicios.aquituremodelacion.cl/"
+  }
 }
