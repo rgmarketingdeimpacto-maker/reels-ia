@@ -1,0 +1,96 @@
+{
+  "empresa": "Aquí Tu Remodelación",
+  "actualizado": "2026-06-18",
+  "metrics": {
+    "seguidores": "",
+    "alcance": "",
+    "leads": "",
+    "publicados": "0"
+  },
+  "content": [
+    {
+      "nombre": "Reel Cocina 01",
+      "archivo": "reel-cocina-01.mp4",
+      "tipo": "video",
+      "estado": "listo",
+      "nota": "Patrón Transformación · Antes y Después",
+      "logo": "logo.png",
+      "concepto": "Mostrar que una cocina no nace con los materiales, sino con una visión. El video parte desde una representación simple del proyecto —un espacio blanco con líneas arquitectónicas— y acompaña a la protagonista mientras esa idea se transforma en una cocina terminada.\n\nLa decisión creativa fue utilizar la transformación como recurso principal: pasar de un concepto abstracto a un resultado tangible, destacando cubiertas, terminaciones y detalles que convierten un sueño en un espacio real.\nLa emoción buscada es la satisfacción de ver una idea materializada y descubrir que el resultado puede superar lo que se había imaginado.",
+      "audio": ""
+    }
+  ],
+  "ideas": [
+    {
+      "texto": "Antes y después de una cocina: de la frustración cotidiana a la satisfacción total.",
+      "tag": "Transformación"
+    },
+    {
+      "texto": "El cliente que dudó: \"No sabía si valía la pena hasta que lo vio terminado.\"",
+      "tag": "Testimonio"
+    },
+    {
+      "texto": "Clóset a medida: cada centímetro pensado para tu espacio y tu forma de vivir.",
+      "tag": "Producto"
+    },
+    {
+      "texto": "El quincho que faltaba: transformar el patio en el lugar favorito de la casa.",
+      "tag": "Transformación"
+    }
+  ],
+  "branding": {
+    "logo": "logo.png",
+    "color1": "#2C1810",
+    "color2": "#8B5E3C",
+    "color3": "#F5F0EB"
+  },
+  "photos": [],
+  "automatizaciones": [
+    {
+      "nombre": "WhatsApp automático",
+      "desc": "Respuestas automáticas a consultas entrantes",
+      "icon": "💬",
+      "estado": "pendiente"
+    },
+    {
+      "nombre": "Seguimiento de leads",
+      "desc": "Notificación cuando alguien consulta desde redes",
+      "icon": "🎯",
+      "estado": "pendiente"
+    },
+    {
+      "nombre": "Alertas de métricas",
+      "desc": "Reporte semanal automático al correo",
+      "icon": "🔔",
+      "estado": "pendiente"
+    }
+  ],
+  "competencia": [
+    {
+      "empresa": "Aquí Tu Remodelación",
+      "seguidores": "—",
+      "frecuencia": "Por definir",
+      "tipo": "Reels + Fotos",
+      "tu": true
+    }
+  ],
+  "redes": {
+    "ig": {
+      "seguidores": "1317",
+      "seguidos": "10",
+      "publicaciones": "107",
+      "url": "https://www.instagram.com/aquituremodelacionchile/"
+    },
+    "linkedin": {
+      "seguidores": "",
+      "publicaciones": "",
+      "url": ""
+    },
+    "facebook": {
+      "seguidores": "",
+      "seguidos": "",
+      "publicaciones": "",
+      "url": ""
+    },
+    "sitioweb": "https://servicios.aquituremodelacion.cl/"
+  }
+}
