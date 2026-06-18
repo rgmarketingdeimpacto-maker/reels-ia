@@ -199,6 +199,45 @@
   /* Disuasión básica de descarga (no es un bloqueo real, ver nota) */
   .no-download { -webkit-touch-callout: none; }
 
+
+  /* PRECIOS */
+  .precios-section { margin-bottom: 36px; }
+  .precios-section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--cafe-claro); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--borde); }
+  .redes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 8px; }
+  .red-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 12px; padding: 20px; }
+  .red-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .red-card-icon { font-size: 22px; }
+  .red-card-name { font-size: 13px; font-weight: 700; }
+  .red-stat { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--crema-oscura); font-size: 12.5px; }
+  .red-stat:last-child { border-bottom: none; }
+  .red-stat-label { color: var(--texto-suave); }
+  .red-stat-value { font-weight: 600; }
+  .red-link { display: inline-block; margin-top: 12px; font-size: 11.5px; color: var(--cafe-claro); font-weight: 500; text-decoration: none; }
+  .red-link:hover { text-decoration: underline; }
+  .planes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .plan-card { background: var(--blanco); border: 2px solid var(--borde); border-radius: 14px; padding: 24px; position: relative; }
+  .plan-card.plan-activo { border-color: var(--cafe); }
+  .plan-activo-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--cafe); color: var(--blanco); font-size: 10px; font-weight: 700; padding: 4px 14px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.05em; }
+  .plan-nombre { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .plan-precio { font-size: 26px; font-weight: 800; color: var(--cafe); margin-bottom: 4px; }
+  .plan-precio-sub { font-size: 11px; color: var(--texto-suave); margin-bottom: 16px; }
+  .plan-items { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .plan-items li { font-size: 12.5px; color: var(--texto); display: flex; align-items: flex-start; gap: 7px; }
+  .plan-items li::before { content: '✓'; color: var(--verde); font-weight: 700; flex-shrink: 0; }
+  .servicios-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .servicio-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 12px; padding: 20px; }
+  .servicio-nombre { font-size: 13.5px; font-weight: 700; margin-bottom: 6px; }
+  .servicio-desc { font-size: 12px; color: var(--texto-suave); line-height: 1.5; margin-bottom: 12px; }
+  .servicio-precio { font-size: 18px; font-weight: 800; color: var(--cafe); margin-bottom: 12px; }
+  .servicio-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .servicio-items li { font-size: 12px; display: flex; align-items: flex-start; gap: 6px; }
+  .servicio-items li::before { content: '✓'; color: var(--verde); font-weight: 700; flex-shrink: 0; }
+  @media (max-width: 720px) {
+    .redes-grid { grid-template-columns: 1fr; }
+    .planes-grid { grid-template-columns: 1fr; }
+    .servicios-grid { grid-template-columns: 1fr; }
+  }
+
   /* ───────── RESPONSIVE: TABLET ───────── */
   @media (max-width: 1024px) {
     .metrics-grid, .metricas-grid-full { grid-template-columns: repeat(2, 1fr); }
@@ -291,18 +330,10 @@
     </div>
   </div>
   <nav class="sidebar-nav">
-    <div class="nav-label">Principal</div>
     <div class="nav-item active" onclick="showPage('resumen', this)"><span class="nav-icon">📊</span> Resumen</div>
     <div class="nav-item" onclick="showPage('contenido', this)"><span class="nav-icon">🎬</span> Contenido</div>
-    <div class="nav-item" onclick="showPage('ideas', this)"><span class="nav-icon">💡</span> Ideas IA</div>
-    <div class="nav-label">Marca</div>
     <div class="nav-item" onclick="showPage('biblioteca', this)"><span class="nav-icon">🗂</span> Biblioteca</div>
-    <div class="nav-item" onclick="showPage('sitioweb', this)"><span class="nav-icon">🌐</span> Sitio Web</div>
-    <div class="nav-label">Gestión</div>
-    <div class="nav-item" onclick="showPage('automatizaciones', this)"><span class="nav-icon">⚡</span> Automatizaciones</div>
-    <div class="nav-item" onclick="showPage('competencia', this)"><span class="nav-icon">🏆</span> Competencia</div>
-    <div class="nav-item" onclick="showPage('reuniones', this)"><span class="nav-icon">📅</span> Reuniones</div>
-    <div class="nav-item" onclick="showPage('metricas', this)"><span class="nav-icon">📈</span> Métricas</div>
+    <div class="nav-item" onclick="showPage('precios', this)"><span class="nav-icon">💼</span> Cotización</div>
   </nav>
   <div class="sidebar-footer">
     <span>Powered by Marketing de Impacto</span>
@@ -330,23 +361,19 @@
     <!-- RESUMEN -->
     <div class="page active" id="page-resumen">
       <div class="section">
-        <div class="section-header"><div class="section-title">Resumen del mes</div></div>
-        <div class="metrics-grid" id="metrics-grid"></div>
-        <div class="admin-panel edit-field">
-          <label>Seguidores IG</label><input id="m-seguidores" placeholder="ej: 1.240">
-          <label>Alcance 30 días</label><input id="m-alcance" placeholder="ej: 18.500">
-          <label>Leads recibidos</label><input id="m-leads" placeholder="ej: 12">
-          <label>Contenidos publicados este mes</label><input id="m-publicados" placeholder="ej: 3">
-          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="saveMetrics()">Guardar métricas</button>
-        </div>
+        <div class="section-header"><div class="section-title">Estado actual</div></div>
+        <div class="redes-grid" id="redes-grid-resumen"></div>
       </div>
       <div class="section">
         <div class="section-header"><div class="section-title">Contenido reciente</div><div class="section-link" onclick="document.querySelector('[onclick*=contenido]').click()">Ver todo →</div></div>
         <div class="content-grid" id="resumen-content-preview"></div>
       </div>
-      <div class="section">
-        <div class="section-header"><div class="section-title">Automatizaciones</div></div>
-        <div class="status-row" id="resumen-automatizaciones"></div>
+      <div class="section" id="resumen-web-section">
+        <div class="section-header"><div class="section-title">Sitio Web</div></div>
+        <div id="resumen-web-link-wrap" style="background:var(--blanco);border:1px solid var(--borde);border-radius:12px;padding:18px 20px;font-size:13px;display:flex;align-items:center;gap:10px;">
+          <span style="font-size:20px;">🌐</span>
+          <span id="resumen-web-text" style="color:var(--texto-suave);">Sin URL registrada</span>
+        </div>
       </div>
     </div>
 
@@ -428,13 +455,6 @@
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-header">
-          <div class="section-title">Material de cada reel</div>
-          <div class="section-link" style="cursor:default;color:var(--texto-suave);font-weight:400;">Solo para ver y escuchar · sin descarga</div>
-        </div>
-        <div id="sets-list"></div>
-      </div>
     </div>
 
     <!-- SITIO WEB -->
@@ -508,6 +528,114 @@
       </div>
     </div>
 
+
+    <!-- PRECIOS / COTIZACIÓN -->
+    <div class="page" id="page-precios">
+
+      <div class="precios-section">
+        <div class="precios-section-title">Estado actual</div>
+        <div class="redes-grid" id="redes-grid"></div>
+        <div class="admin-panel edit-field">
+          <strong style="font-size:13px;">Instagram</strong>
+          <label>Seguidores</label><input id="r-ig-seg" placeholder="ej: 1.240">
+          <label>Seguidos</label><input id="r-ig-segu" placeholder="ej: 380">
+          <label>Publicaciones</label><input id="r-ig-pub" placeholder="ej: 47">
+          <label>URL perfil</label><input id="r-ig-url" placeholder="https://instagram.com/...">
+          <strong style="font-size:13px;margin-top:14px;display:block;">LinkedIn</strong>
+          <label>Seguidores</label><input id="r-li-seg" placeholder="ej: 220">
+          <label>Publicaciones</label><input id="r-li-pub" placeholder="ej: 12">
+          <label>URL perfil</label><input id="r-li-url" placeholder="https://linkedin.com/...">
+          <strong style="font-size:13px;margin-top:14px;display:block;">Facebook</strong>
+          <label>Seguidores</label><input id="r-fb-seg" placeholder="ej: 800">
+          <label>Seguidos</label><input id="r-fb-segu" placeholder="ej: 800">
+          <label>Publicaciones</label><input id="r-fb-pub" placeholder="ej: 30">
+          <label>URL perfil</label><input id="r-fb-url" placeholder="https://facebook.com/...">
+          <strong style="font-size:13px;margin-top:14px;display:block;">Sitio Web</strong>
+          <label>URL</label><input id="r-web" placeholder="https://...">
+          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="saveRedes()">Guardar redes</button>
+        </div>
+      </div>
+
+      <div class="precios-section">
+        <div class="precios-section-title">Planes</div>
+        <div class="planes-grid">
+          <div class="plan-card">
+            <div class="plan-nombre">Plan Presencia</div>
+            <div class="plan-precio">$180.000</div>
+            <div class="plan-precio-sub">mensuales</div>
+            <ul class="plan-items">
+              <li>4 conceptos mensuales</li>
+              <li>4 reels</li>
+              <li>4 carruseles de 3 imágenes</li>
+              <li>Acceso al portal privado</li>
+              <li>Historial y biblioteca de contenidos</li>
+              <li>Resumen de métricas</li>
+            </ul>
+          </div>
+          <div class="plan-card">
+            <div class="plan-nombre">Plan Crecimiento</div>
+            <div class="plan-precio">$290.000</div>
+            <div class="plan-precio-sub">mensuales</div>
+            <ul class="plan-items">
+              <li>8 conceptos mensuales</li>
+              <li>8 reels</li>
+              <li>8 carruseles de 3 imágenes</li>
+              <li>Acceso al portal privado</li>
+              <li>Historial y biblioteca de contenidos</li>
+              <li>Resumen de métricas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="precios-section">
+        <div class="precios-section-title">Servicios adicionales</div>
+        <div class="servicios-grid">
+          <div class="servicio-card">
+            <div class="servicio-nombre">Gestión de Redes Sociales</div>
+            <div class="servicio-desc">Publicación de contenidos y respuesta a consultas o comentarios generados por las publicaciones desarrolladas.</div>
+            <div class="servicio-precio">$120.000 <span style="font-size:12px;font-weight:400;color:var(--texto-suave);">/ mes</span></div>
+            <ul class="servicio-items">
+              <li>Publicación de contenidos</li>
+              <li>Respuesta a consultas</li>
+              <li>Respuesta a comentarios</li>
+            </ul>
+          </div>
+          <div class="servicio-card">
+            <div class="servicio-nombre">Automatización WhatsApp</div>
+            <div class="servicio-desc">Implementación y entrenamiento de un asistente para responder preguntas frecuentes y facilitar la atención inicial.</div>
+            <div class="servicio-precio">$160.000 <span style="font-size:12px;font-weight:400;color:var(--texto-suave);">único</span></div>
+            <ul class="servicio-items">
+              <li>Horarios</li>
+              <li>Servicios</li>
+              <li>Preguntas frecuentes</li>
+              <li>Información básica</li>
+            </ul>
+          </div>
+          <div class="servicio-card">
+            <div class="servicio-nombre">Landing Pages</div>
+            <div class="servicio-desc">Diseño y desarrollo de páginas orientadas a campañas o servicios específicos.</div>
+            <div class="servicio-precio">Desde $60.000</div>
+          </div>
+          <div class="servicio-card">
+            <div class="servicio-nombre">Sitios Web</div>
+            <div class="servicio-desc">Desarrollo y actualización de sitios web corporativos.</div>
+            <div class="servicio-precio">Desde $160.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="precios-section">
+        <div class="precios-section-title">Datos de la empresa</div>
+        <div style="background:var(--blanco);border:1px solid var(--borde);border-radius:12px;padding:20px 22px;font-size:13px;line-height:1.7;color:var(--texto-suave);">
+          <div><strong style="color:var(--texto);">Razón social:</strong> RG Marketing de Impacto SpA</div>
+          <div><strong style="color:var(--texto);">RUT:</strong> 77.893.291-1</div>
+          <div><strong style="color:var(--texto);">Domicilio:</strong> Carlos Silva Vildósola #8149, depto. D, comuna La Reina, Santiago</div>
+          <div><strong style="color:var(--texto);">Correo electrónico:</strong> rodrigogarridoalvarez@gmail.com</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -526,7 +654,8 @@
     automatizaciones: ['Automatizaciones ⚡', 'Herramientas que trabajan por ti mientras duermes.'],
     competencia: ['Competencia 🏆', 'Comparación con otras empresas del rubro.'],
     reuniones: ['Reuniones 📅', 'Historial y próximas sesiones de trabajo.'],
-    metricas: ['Métricas 📈', 'Seguidores, alcance y leads en detalle.']
+    metricas: ['Métricas 📈', 'Seguidores, alcance y leads en detalle.'],
+    precios: ['Cotización 💼', 'Estado actual de tus redes y planes disponibles.']
   };
 
   const DEFAULT_DATA = {
@@ -551,7 +680,13 @@
     ],
     competencia: [
       { empresa: 'Aquí Tu Remodelación', seguidores: '—', frecuencia: 'Por definir', tipo: 'Reels + Fotos', tu: true }
-    ]
+    ],
+    redes: {
+      ig: { seguidores: '', seguidos: '', publicaciones: '', url: '' },
+      linkedin: { seguidores: '', publicaciones: '', url: '' },
+      facebook: { seguidores: '', seguidos: '', publicaciones: '', url: '' },
+      sitioweb: ''
+    }
   };
 
   // ───────── STORAGE (archivo datos.json en la misma carpeta) ─────────
@@ -655,6 +790,7 @@
     renderSets();
     renderAutomatizaciones();
     renderCompetencia();
+    renderRedes();
   }
 
   function renderMetrics() {
@@ -943,6 +1079,77 @@
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
     window.scrollTo(0, 0);
+  }
+
+
+  function renderRedes() {
+    const r = DATA.redes || { ig: {}, linkedin: {}, facebook: {}, sitioweb: '' };
+    const ig = r.ig || {}; const li = r.linkedin || {}; const fb = r.facebook || {};
+    const redesHtml = `
+      <div class="red-card">
+        <div class="red-card-header"><span class="red-card-icon">📸</span><span class="red-card-name">Instagram</span></div>
+        <div class="red-stat"><span class="red-stat-label">Seguidores</span><span class="red-stat-value">${ig.seguidores || '—'}</span></div>
+        <div class="red-stat"><span class="red-stat-label">Seguidos</span><span class="red-stat-value">${ig.seguidos || '—'}</span></div>
+        <div class="red-stat"><span class="red-stat-label">Publicaciones</span><span class="red-stat-value">${ig.publicaciones || '—'}</span></div>
+        ${ig.url ? `<a class="red-link" href="${ig.url}" target="_blank">Ver perfil →</a>` : ''}
+      </div>
+      <div class="red-card">
+        <div class="red-card-header"><span class="red-card-icon">💼</span><span class="red-card-name">LinkedIn</span></div>
+        <div class="red-stat"><span class="red-stat-label">Seguidores</span><span class="red-stat-value">${li.seguidores || '—'}</span></div>
+        <div class="red-stat"><span class="red-stat-label">Publicaciones</span><span class="red-stat-value">${li.publicaciones || '—'}</span></div>
+        ${li.url ? `<a class="red-link" href="${li.url}" target="_blank">Ver perfil →</a>` : ''}
+      </div>
+      <div class="red-card">
+        <div class="red-card-header"><span class="red-card-icon">👥</span><span class="red-card-name">Facebook</span></div>
+        <div class="red-stat"><span class="red-stat-label">Seguidores</span><span class="red-stat-value">${fb.seguidores || '—'}</span></div>
+        <div class="red-stat"><span class="red-stat-label">Seguidos</span><span class="red-stat-value">${fb.seguidos || '—'}</span></div>
+        <div class="red-stat"><span class="red-stat-label">Publicaciones</span><span class="red-stat-value">${fb.publicaciones || '—'}</span></div>
+        ${fb.url ? `<a class="red-link" href="${fb.url}" target="_blank">Ver perfil →</a>` : ''}
+      </div>`;
+    const gridMain = document.getElementById('redes-grid');
+    if (gridMain) gridMain.innerHTML = redesHtml;
+    // Render same grid in resumen page
+    const gridResumen = document.getElementById('redes-grid-resumen');
+    if (gridResumen) gridResumen.innerHTML = redesHtml;
+    // Sitio web en resumen
+    const webText = document.getElementById('resumen-web-text');
+    if (webText) {
+      if (r.sitioweb) {
+        webText.innerHTML = `<a href="${r.sitioweb}" target="_blank" style="color:var(--cafe-claro);font-weight:600;">${r.sitioweb}</a>`;
+      } else {
+        webText.textContent = 'Sin URL registrada';
+      }
+    }
+    // Fill admin inputs
+    const set = (id, val) => { const el = document.getElementById(id); if(el) el.value = val || ''; };
+    set('r-ig-seg', ig.seguidores); set('r-ig-segu', ig.seguidos); set('r-ig-pub', ig.publicaciones); set('r-ig-url', ig.url);
+    set('r-li-seg', li.seguidores); set('r-li-pub', li.publicaciones); set('r-li-url', li.url);
+    set('r-fb-seg', fb.seguidores); set('r-fb-segu', fb.seguidos); set('r-fb-pub', fb.publicaciones); set('r-fb-url', fb.url);
+    set('r-web', r.sitioweb);
+  }
+
+  function saveRedes() {
+    if (!DATA.redes) DATA.redes = { ig: {}, linkedin: {}, facebook: {}, sitioweb: '' };
+    DATA.redes.ig = {
+      seguidores: document.getElementById('r-ig-seg').value.trim(),
+      seguidos: document.getElementById('r-ig-segu').value.trim(),
+      publicaciones: document.getElementById('r-ig-pub').value.trim(),
+      url: document.getElementById('r-ig-url').value.trim()
+    };
+    DATA.redes.linkedin = {
+      seguidores: document.getElementById('r-li-seg').value.trim(),
+      publicaciones: document.getElementById('r-li-pub').value.trim(),
+      url: document.getElementById('r-li-url').value.trim()
+    };
+    DATA.redes.facebook = {
+      seguidores: document.getElementById('r-fb-seg').value.trim(),
+      seguidos: document.getElementById('r-fb-segu').value.trim(),
+      publicaciones: document.getElementById('r-fb-pub').value.trim(),
+      url: document.getElementById('r-fb-url').value.trim()
+    };
+    DATA.redes.sitioweb = document.getElementById('r-web').value.trim();
+    saveData();
+    renderRedes();
   }
 
   loadData();
