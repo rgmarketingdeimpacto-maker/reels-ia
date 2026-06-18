@@ -361,12 +361,20 @@
     <!-- RESUMEN -->
     <div class="page active" id="page-resumen">
       <div class="section">
-        <div class="section-header"><div class="section-title">Estado actual</div></div>
+        <div class="section-header"><div class="section-title">Métricas</div></div>
+        <div class="metrics-grid" id="metrics-grid"></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><div class="section-title">Estado actual de redes</div></div>
         <div class="redes-grid" id="redes-grid-resumen"></div>
       </div>
       <div class="section">
         <div class="section-header"><div class="section-title">Contenido reciente</div><div class="section-link" onclick="document.querySelector('[onclick*=contenido]').click()">Ver todo →</div></div>
         <div class="content-grid" id="resumen-content-preview"></div>
+      </div>
+      <div class="section">
+        <div class="section-header"><div class="section-title">Automatizaciones</div></div>
+        <div class="status-row" id="resumen-automatizaciones"></div>
       </div>
       <div class="section" id="resumen-web-section">
         <div class="section-header"><div class="section-title">Sitio Web</div></div>
@@ -441,6 +449,7 @@
           </div>
         </div>
         <div class="photo-grid" id="photo-grid"></div>
+        <div id="sets-list" style="margin-top:24px;"></div>
         <div class="admin-panel edit-field" style="margin-top:20px;">
           <strong style="font-size:13px;">Logo y colores de marca</strong>
           <label>Archivo de logo (ruta relativa, ej: logo.png)</label><input id="b-logo" placeholder="logo.png">
@@ -521,6 +530,14 @@
       <div class="section">
         <div class="section-header"><div class="section-title">Métricas detalladas</div></div>
         <div class="metricas-grid-full" id="metricas-full"></div>
+        <div class="admin-panel edit-field" style="margin-top:16px;">
+          <strong style="font-size:13px;">Actualizar métricas</strong>
+          <label>Seguidores IG</label><input id="m-seguidores" placeholder="ej: 1.317">
+          <label>Alcance 30 días</label><input id="m-alcance" placeholder="ej: 4.200">
+          <label>Leads recibidos</label><input id="m-leads" placeholder="ej: 8">
+          <label>Contenidos publicados este mes</label><input id="m-publicados" placeholder="ej: 4">
+          <button class="btn btn-primary btn-sm" style="margin-top:12px" onclick="saveMetrics()">Guardar métricas</button>
+        </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
           <div class="chart-placeholder"><div class="chart-icon">📈</div>Crecimiento de seguidores<br><span style="font-size:11px;">Disponible al conectar Instagram</span></div>
           <div class="chart-placeholder"><div class="chart-icon">👁</div>Alcance por contenido<br><span style="font-size:11px;">Disponible al conectar Instagram</span></div>
@@ -808,8 +825,8 @@
     set('m-alcance', m.alcance);
     set('m-leads', m.leads);
     set('m-publicados', m.publicados);
-
-    document.getElementById('metricas-full').innerHTML = `
+    const mf = document.getElementById('metricas-full');
+    if (mf) mf.innerHTML = `
       <div class="metric-card"><div class="metric-label">Seguidores IG</div>${m.seguidores ? `<div class="metric-value">${m.seguidores}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.seguidores ? 'Actualizado' : '⏳ Pendiente conexión'}</div></div>
       <div class="metric-card"><div class="metric-label">Alcance mensual</div>${m.alcance ? `<div class="metric-value">${m.alcance}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.alcance ? 'Actualizado' : '⏳ Pendiente conexión'}</div></div>
       <div class="metric-card"><div class="metric-label">Leads recibidos</div>${m.leads ? `<div class="metric-value">${m.leads}</div>` : `<div class="metric-placeholder">— —</div>`}<div class="metric-change neutral" style="margin-top:8px">${m.leads ? 'Actualizado' : '⏳ Pendiente conexión'}</div></div>
